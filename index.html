@@ -6,33 +6,37 @@
   <title>Haferkemper Bau – Bauunternehmung Oelde</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
   <style>
-    /* ============================================================
-       VARIABLES — Light theme, original colour palette
-       ============================================================ */
+    /* ================================================================
+       VARIABLES
+    ================================================================ */
     :root {
-      --gold:        #B8860B;       /* Original-like dark gold */
+      --gold:        #B8860B;
       --gold-light:  #D4A017;
       --gold-pale:   #F5EDD0;
+      --gold-glow:   rgba(184,134,11,0.18);
       --white:       #FFFFFF;
       --off-white:   #F8F7F4;
-      --stone:       #EEECE7;
-      --stone-dark:  #E2DED5;
-      --text:        #1A1A18;
-      --text-mid:    #4A4A45;
-      --text-muted:  #7A7A72;
-      --border:      #D8D4C8;
-      --border-gold: rgba(184,134,11,0.25);
-      --accent-bg:   #2B2D26;       /* Dark section accent – header/footer */
-      --accent-mid:  #3D3F36;
-      --font-display: 'Playfair Display', Georgia, serif;
-      --font-body:    'Inter', 'Helvetica Neue', sans-serif;
-      --font-mono:    'DM Mono', monospace;
-      --radius:       6px;
-      --transition:   0.3s cubic-bezier(0.4,0,0.2,1);
-      --max:          1200px;
-      --hh:           76px;
+      --cream:       #F2EFE8;
+      --stone:       #E8E4DB;
+      --text:        #18180F;
+      --text-mid:    #484840;
+      --text-muted:  #7A7A6E;
+      --border:      #D8D3C5;
+      --dark:        #181A14;
+      --dark-mid:    #252720;
+      --dark-soft:   #2E3028;
+      --font-display:'Cormorant Garamond', Georgia, serif;
+      --font-body:   'Outfit', 'Helvetica Neue', sans-serif;
+      --font-mono:   'DM Mono', monospace;
+      --radius:      4px;
+      --radius-lg:   12px;
+      --ease:        cubic-bezier(0.4,0,0.2,1);
+      --t:           0.35s;
+      --max:         1240px;
+      --hh:          72px;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -43,14 +47,14 @@
     ul { list-style: none; }
     button { cursor: pointer; border: none; background: none; font-family: inherit; }
 
-    h1,h2,h3,h4 { font-family: var(--font-display); line-height: 1.15; color: var(--text); }
-    h1 { font-size: clamp(2.2rem,5vw,4rem); letter-spacing: -0.02em; }
-    h2 { font-size: clamp(1.8rem,3.5vw,2.8rem); letter-spacing: -0.015em; }
-    h3 { font-size: clamp(1.15rem,2vw,1.5rem); }
+    h1,h2,h3,h4 { font-family: var(--font-display); line-height: 1.1; color: var(--text); }
+    h1 { font-size: clamp(2.8rem,6vw,5rem); letter-spacing: -0.01em; font-weight: 600; }
+    h2 { font-size: clamp(2rem,4vw,3.2rem); letter-spacing: -0.01em; font-weight: 600; }
+    h3 { font-size: clamp(1.3rem,2.5vw,1.8rem); font-weight: 600; }
 
-    .label {
+    .eyebrow {
       font-family: var(--font-mono);
-      font-size: 0.65rem;
+      font-size: 0.62rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--gold);
@@ -59,675 +63,806 @@
       gap: 10px;
       margin-bottom: 1rem;
     }
-    .label::before { content:''; display:block; width:28px; height:1px; background:var(--gold); flex-shrink:0; }
-    .label-center { justify-content: center; }
-    .label-center::before { display: none; }
+    .eyebrow::before { content:''; display:block; width:28px; height:1px; background:var(--gold); flex-shrink:0; }
+    .eyebrow-light { color: var(--gold-light); }
+    .eyebrow-light::before { background: var(--gold-light); }
+    .eyebrow-center { justify-content:center; }
+    .eyebrow-center::before { display:none; }
 
     .container { width:100%; max-width:var(--max); margin:0 auto; padding:0 clamp(1.25rem,4vw,3rem); }
-    .sp { padding: clamp(4rem,7vw,7rem) 0; }
-    .sp-sm { padding: clamp(2.5rem,4vw,4.5rem) 0; }
+    .sp { padding: clamp(5rem,8vw,9rem) 0; }
+    .sp-sm { padding: clamp(3rem,5vw,5rem) 0; }
 
     /* BUTTONS */
     .btn {
       display: inline-flex; align-items: center; gap: 8px;
-      padding: 0.85rem 1.8rem; border-radius: var(--radius);
-      font-size: 0.82rem; font-weight: 600; letter-spacing: 0.08em;
-      text-transform: uppercase; transition: var(--transition);
+      padding: 0.9rem 2rem; border-radius: 2rem;
+      font-family: var(--font-body); font-size: 0.82rem; font-weight: 500;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      transition: all var(--t) var(--ease);
     }
     .btn-gold { background: var(--gold); color: var(--white); }
-    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(184,134,11,0.3); }
-    .btn-outline-gold { border: 1.5px solid var(--gold); color: var(--gold); }
-    .btn-outline-gold:hover { background: var(--gold); color: var(--white); transform: translateY(-2px); }
-    .btn-outline-white { border: 1.5px solid rgba(255,255,255,0.5); color: var(--white); }
-    .btn-outline-white:hover { border-color: var(--white); background: rgba(255,255,255,0.1); }
+    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 10px 32px rgba(184,134,11,0.35); }
+    .btn-outline { border: 1px solid rgba(255,255,255,0.4); color: var(--white); }
+    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.1); }
+    .btn-outline-dark { border: 1px solid var(--border); color: var(--text-mid); }
+    .btn-outline-dark:hover { border-color: var(--gold); color: var(--gold); }
+    .btn svg { width:16px; height:16px; }
 
-    /* ============================================================
+    /* KEYFRAMES */
+    @keyframes fu { from{ opacity:0; transform:translateY(28px); } to{ opacity:1; transform:translateY(0); } }
+    @keyframes fw { from{ opacity:0; transform:translateY(16px); } to{ opacity:1; transform:translateY(0); } }
+    @keyframes scale-in { from{ opacity:0; transform:scale(0.96); } to{ opacity:1; transform:scale(1); } }
+
+    /* SCROLL REVEAL — safe, no opacity:0 default */
+    .rv { opacity: 0; transform: translateY(30px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+    .rv.in { opacity: 1; transform: translateY(0); }
+    .rv.delay-1 { transition-delay: 0.12s; }
+    .rv.delay-2 { transition-delay: 0.22s; }
+    .rv.delay-3 { transition-delay: 0.32s; }
+    .rv.delay-4 { transition-delay: 0.42s; }
+
+    /* ================================================================
        HEADER
-       ============================================================ */
+    ================================================================ */
     #hdr {
       position: fixed; top:0; left:0; width:100%; height:var(--hh); z-index:1000;
-      transition: var(--transition);
+      transition: background var(--t) var(--ease), box-shadow var(--t) var(--ease);
     }
     #hdr.scrolled {
-      background: rgba(43,45,38,0.97);
-      backdrop-filter: blur(16px);
-      box-shadow: 0 2px 32px rgba(0,0,0,0.25);
+      background: rgba(24,26,20,0.96);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.06);
     }
     .hdr-inner { display:flex; align-items:center; justify-content:space-between; height:100%; }
-    .logo-wrap { display:flex; flex-direction:column; gap:2px; }
-    .logo-main { font-family:var(--font-display); font-size:1.25rem; font-weight:700; color:var(--white); line-height:1; }
-    .logo-sub { font-family:var(--font-mono); font-size:0.52rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-light); }
-    nav { display:flex; align-items:center; gap:2.2rem; }
-    .nl { font-size:0.78rem; font-weight:500; letter-spacing:0.09em; text-transform:uppercase; color:rgba(255,255,255,0.65); transition:color var(--transition); position:relative; padding-bottom:3px; }
-    .nl::after { content:''; position:absolute; bottom:0; left:0; width:0; height:1px; background:var(--gold-light); transition:width var(--transition); }
+    .logo-wrap { display:flex; flex-direction:column; gap:1px; }
+    .logo-main { font-family:var(--font-display); font-size:1.3rem; font-weight:700; color:var(--white); line-height:1; letter-spacing:0.02em; }
+    .logo-sub { font-family:var(--font-mono); font-size:0.5rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-light); }
+    nav { display:flex; align-items:center; gap:2.5rem; }
+    .nl { font-size:0.76rem; font-weight:400; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.6); transition:color var(--t); position:relative; padding-bottom:2px; }
+    .nl::after { content:''; position:absolute; bottom:0; left:0; width:0; height:1px; background:var(--gold-light); transition:width 0.3s var(--ease); }
     .nl:hover { color:var(--white); }
     .nl:hover::after { width:100%; }
-    .nl-cta { padding:0.55rem 1.2rem; font-size:0.75rem; }
-
-    .ham { display:none; z-index:1001; flex-direction:column; gap:5px; padding:6px; }
-    .ham span { display:block; width:22px; height:2px; background:var(--white); transition:var(--transition); }
-    .ham.open span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
-    .ham.open span:nth-child(2) { opacity:0; }
-    .ham.open span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
+    .nl-cta { padding:0.5rem 1.3rem; border:1px solid rgba(184,134,11,0.5); border-radius:2rem; color:var(--gold-light); }
+    .nl-cta::after { display:none; }
+    .nl-cta:hover { border-color:var(--gold-light); background:rgba(184,134,11,0.1); color:var(--white); }
 
     @media(max-width:860px){
-      .ham{display:flex;}
-      nav{ 
-      visibility: hidden;
-      opacity: 0;
-      pointer-events: none;
-      position: fixed;
-      inset: var(--hh) 0 0 0;
-      background: rgba(43,45,38,0.98);
-      flex-direction: column;
-      justify-content: center;
-      gap: 2.5rem;
-      backdrop-filter: blur(16px);
-      z-index: 999;
-      display: flex;
-      transition: opacity 0.3s ease, visibility 0.3s ease;
+      nav { display:none !important; }
     }
-      nav.open{
-      visibility: visible;
-      opacity: 1;
-      pointer-events: all;
-    }
-      .nl{font-size:1.4rem;}
+    @media(min-width:861px){
+      #mobile-nav { display:none; }
     }
 
-    /* ============================================================
-       HERO
-       ============================================================ */
+    /* ================================================================
+       HERO — dark, cinematic
+    ================================================================ */
     #hero {
       min-height: 100vh; position:relative; overflow:hidden;
-      display:flex; flex-direction:column;
+      display: flex; flex-direction: column;
+      background: var(--dark);
     }
     .hero-bg { position:absolute; inset:0; z-index:0; }
-    .hero-bg img { width:100%; height:100%; object-fit:cover; }
+    .hero-bg img { width:100%; height:100%; object-fit:cover; opacity:0.45; }
     .hero-bg::after {
       content:''; position:absolute; inset:0;
-      background: linear-gradient(to right, rgba(25,27,20,0.85) 0%, rgba(25,27,20,0.5) 55%, rgba(25,27,20,0.2) 100%),
-                  linear-gradient(to top, rgba(25,27,20,0.7) 0%, transparent 40%);
+      background:
+        linear-gradient(to right, rgba(18,20,14,0.92) 0%, rgba(18,20,14,0.6) 55%, rgba(18,20,14,0.3) 100%),
+        linear-gradient(to top, rgba(18,20,14,0.95) 0%, transparent 50%);
     }
-    /* Guaranteed visible background if image fails */
-    .hero-bg img { background: var(--accent-bg); }
+    /* Subtle grain overlay */
+    .hero-grain {
+      position: absolute; inset:0; z-index:1; pointer-events:none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.4;
+    }
     .hero-body {
-      position:relative; z-index:1; flex:1;
+      position:relative; z-index:2; flex:1;
       display:flex; align-items:center;
       padding-top: var(--hh);
-      padding-bottom: 3rem;
+      padding-bottom: 2rem;
     }
-    .hero-text { max-width: 620px; }
+    .hero-content { max-width: 680px; }
+
     .hero-eyebrow {
-      font-family:var(--font-mono); font-size:0.65rem; letter-spacing:0.25em;
+      font-family:var(--font-mono); font-size:0.62rem; letter-spacing:0.28em;
       text-transform:uppercase; color:var(--gold-light);
-      display:flex; align-items:center; gap:12px; margin-bottom:1.4rem;
-      opacity:0; animation:fu 0.7s 0.1s ease forwards;
+      display:flex; align-items:center; gap:14px; margin-bottom:1.8rem;
+      opacity:0; animation:fu 0.8s 0.15s var(--ease) forwards;
     }
-    .hero-eyebrow::before{ content:''; display:block; width:36px; height:1px; background:var(--gold-light); }
-    .hero-text h1 {
-      color:var(--white); margin-bottom:1.4rem;
-      opacity:0; animation:fu 0.7s 0.2s ease forwards;
+    .hero-eyebrow::before { content:''; display:block; width:40px; height:1px; background:var(--gold-light); }
+
+    .hero-content h1 {
+      color:var(--white); margin-bottom:0.3rem;
+      opacity:0; animation:fu 0.8s 0.28s var(--ease) forwards;
     }
-    .hero-text h1 em { font-style:normal; color:var(--gold-light); display:block; }
+    .hero-content h1 em {
+      font-style: italic;
+      color: var(--gold-light);
+      display: block;
+    }
     .hero-lead {
-      color:rgba(255,255,255,0.72); font-size:1.02rem; margin-bottom:2.2rem; max-width:500px;
-      opacity:0; animation:fu 0.7s 0.3s ease forwards;
+      color:rgba(255,255,255,0.65); font-size:1rem; margin-bottom:2.5rem;
+      margin-top: 1.5rem;
+      max-width: 520px; line-height: 1.75;
+      opacity:0; animation:fu 0.8s 0.4s var(--ease) forwards;
     }
     .hero-btns {
       display:flex; gap:1rem; flex-wrap:wrap;
-      opacity:0; animation:fu 0.7s 0.4s ease forwards;
+      opacity:0; animation:fu 0.8s 0.52s var(--ease) forwards;
     }
 
-    /* STATS — boxed */
-    .stats-wrap {
-      position:relative; z-index:1;
-      padding: 0 0 3rem 0;
-      opacity:0; animation:fu 0.7s 0.5s ease forwards;
+    /* Vertical text decoration */
+    .hero-side-label {
+      position:absolute; right:3rem; top:50%; transform:translateY(-50%) rotate(90deg);
+      font-family:var(--font-mono); font-size:0.55rem; letter-spacing:0.22em;
+      text-transform:uppercase; color:rgba(255,255,255,0.2);
+      z-index:2;
+      opacity:0; animation:fu 1s 0.8s var(--ease) forwards;
     }
-    .stats-box {
-      max-width: 860px;
-      background: rgba(255,255,255,0.06);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: var(--radius);
+    @media(max-width:860px){ .hero-side-label{display:none;} }
+
+    /* STATS BAR */
+    .stats-bar {
+      position:relative; z-index:2;
+      padding: 0 0 3.5rem 0;
+      opacity:0; animation:fu 0.8s 0.65s var(--ease) forwards;
+    }
+    .stats-inner {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: var(--radius-lg);
+      background: rgba(255,255,255,0.035);
+      backdrop-filter: blur(24px);
+      overflow: hidden;
+      max-width: 900px;
     }
-    .stat {
-      padding: 1.4rem 2rem;
-      border-right: 1px solid rgba(255,255,255,0.1);
+    .stat-item {
+      padding: 1.6rem 2rem;
+      border-right: 1px solid rgba(255,255,255,0.07);
       text-align: center;
     }
-    .stat:last-child { border-right: none; }
+    .stat-item:last-child { border-right:none; }
     .stat-num {
-      font-family:var(--font-display); font-size:2rem; font-weight:700;
-      color:var(--gold-light); line-height:1; margin-bottom:0.3rem;
+      font-family:var(--font-display); font-size:2.2rem; font-weight:700;
+      color:var(--gold-light); line-height:1; margin-bottom:0.35rem;
     }
-    .stat-lbl { font-size:0.65rem; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.55); }
-
-    @media(max-width:600px){
-      .stats-box { grid-template-columns:1fr 1fr; }
-      .stat:nth-child(2){ border-right:none; }
-      .stat { border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .stat-lbl { font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,255,0.45); }
+    @media(max-width:700px){
+      .stats-inner { grid-template-columns:1fr 1fr; }
+      .stat-item:nth-child(2){ border-right:none; }
+    }
+    @media(max-width:480px){
+      .hero-btns { flex-direction:column; }
+      .hero-content h1 { font-size:2.4rem; }
     }
 
-    /* ============================================================
-       PERSON / SVEN SECTION  (early, personal)
-       ============================================================ */
-    #sven { background: var(--off-white); }
+    /* ================================================================
+       INTRO BAND
+    ================================================================ */
+    #intro-band {
+      background: var(--gold);
+      padding: 1rem 0;
+      overflow: hidden;
+    }
+    .band-track {
+      display:flex; gap:3rem; white-space:nowrap;
+      animation: slide 22s linear infinite;
+    }
+    @keyframes slide { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    .band-item {
+      font-family:var(--font-mono); font-size:0.6rem; letter-spacing:0.2em;
+      text-transform:uppercase; color:rgba(255,255,255,0.85);
+      display:flex; align-items:center; gap:1rem; flex-shrink:0;
+    }
+    .band-dot { width:4px; height:4px; background:rgba(255,255,255,0.5); border-radius:50%; }
+
+    /* ================================================================
+       VERSPRECHEN — Bento Grid  ⭐
+    ================================================================ */
+    #versprechen { background: var(--off-white); }
+    .versprechen-header {
+      text-align:center;
+      margin-bottom: clamp(2.5rem,4vw,4rem);
+    }
+    .versprechen-header h2 { margin-bottom:1rem; }
+    .versprechen-header p { color:var(--text-muted); max-width:520px; margin:0 auto; font-size:0.95rem; }
+
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: auto;
+      gap: 14px;
+    }
+
+    /* Card base */
+    .bc {
+      border-radius: var(--radius-lg);
+      padding: clamp(1.8rem,3vw,2.8rem);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+    }
+    .bc:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.1); }
+
+    /* Layout positions */
+    .bc-1 { grid-column: span 5; }  /* Kompetent — tall left */
+    .bc-2 { grid-column: span 4; }  /* Nachhaltig */
+    .bc-3 { grid-column: span 3; }  /* Qualität — accent */
+    .bc-4 { grid-column: span 3; }  /* Kosten */
+    .bc-5 { grid-column: span 5; }  /* Zuverlässig — wide */
+    .bc-6 { grid-column: span 4; }  /* Kundenorientiert */
+
+    @media(max-width:900px){
+      .bc-1,.bc-2 { grid-column: span 6; }
+      .bc-3,.bc-4 { grid-column: span 6; }
+      .bc-5,.bc-6 { grid-column: span 6; }
+    }
+    @media(max-width:560px){
+      .bento-grid { grid-template-columns:1fr; gap:10px; }
+      .bc-1,.bc-2,.bc-3,.bc-4,.bc-5,.bc-6 { grid-column:span 1; }
+    }
+
+    /* Card style variants */
+    .bc-light { background: var(--white); border: 1px solid var(--border); }
+    .bc-cream { background: var(--cream); }
+    .bc-stone { background: var(--stone); }
+    .bc-dark  { background: var(--dark-mid); }
+    .bc-gold  { background: var(--gold); }
+
+    /* Card content */
+    .bc-number {
+      font-family: var(--font-display);
+      font-size: 5rem;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--gold);
+      opacity: 0.12;
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      pointer-events: none;
+      user-select: none;
+    }
+    .bc-dark .bc-number { color: var(--gold-light); opacity: 0.15; }
+    .bc-gold .bc-number { color: var(--white); opacity: 0.25; }
+
+    .bc-tag {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .bc-tag::before { content:''; display:block; width:18px; height:1px; background:var(--gold); }
+    .bc-dark .bc-tag { color:var(--gold-light); }
+    .bc-dark .bc-tag::before { background:var(--gold-light); }
+    .bc-gold .bc-tag { color:rgba(255,255,255,0.8); }
+    .bc-gold .bc-tag::before { background:rgba(255,255,255,0.6); }
+
+    .bc h3 {
+      margin-bottom: 0.8rem;
+      font-size: clamp(1.4rem,2.2vw,1.85rem);
+      color: var(--text);
+    }
+    .bc-dark h3 { color: var(--white); }
+    .bc-gold h3 { color: var(--white); }
+
+    .bc p {
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+    }
+    .bc-dark p { color: rgba(255,255,255,0.6); }
+    .bc-gold p { color: rgba(255,255,255,0.82); }
+
+    /* Icon in bento card */
+    .bc-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.4rem;
+    }
+    .bc-light .bc-icon,
+    .bc-cream .bc-icon,
+    .bc-stone .bc-icon { background:var(--gold-pale); }
+    .bc-dark .bc-icon { background:rgba(255,255,255,0.08); }
+    .bc-gold .bc-icon { background:rgba(255,255,255,0.2); }
+    .bc-icon svg { width:22px; height:22px; }
+    .bc-light .bc-icon svg,
+    .bc-cream .bc-icon svg,
+    .bc-stone .bc-icon svg { stroke:var(--gold); }
+    .bc-dark .bc-icon svg { stroke:var(--gold-light); }
+    .bc-gold .bc-icon svg { stroke:var(--white); }
+
+    /* Pill list inside bento card */
+    .bc-pills {
+      display:flex; flex-wrap:wrap; gap:0.5rem;
+      margin-top:1.2rem;
+    }
+    .bc-pill {
+      font-family:var(--font-mono); font-size:0.58rem;
+      letter-spacing:0.1em; text-transform:uppercase;
+      padding:0.3rem 0.85rem; border-radius:2rem;
+    }
+    .bc-light .bc-pill, .bc-cream .bc-pill, .bc-stone .bc-pill {
+      background:var(--off-white); border:1px solid var(--border); color:var(--text-muted);
+    }
+    .bc-dark .bc-pill {
+      background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.1); color:rgba(255,255,255,0.5);
+    }
+    .bc-gold .bc-pill {
+      background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.85);
+    }
+
+    /* Big stat in card */
+    .bc-stat-big {
+      font-family: var(--font-display);
+      font-size: clamp(3rem,6vw,5rem);
+      font-weight: 700;
+      line-height: 1;
+      color: var(--gold);
+      margin-bottom:0.3rem;
+    }
+    .bc-dark .bc-stat-big { color: var(--gold-light); }
+    .bc-gold .bc-stat-big { color: var(--white); }
+    .bc-stat-label {
+      font-family: var(--font-mono);
+      font-size:0.6rem; letter-spacing:0.14em; text-transform:uppercase;
+      color:var(--text-muted);
+    }
+    .bc-dark .bc-stat-label { color:rgba(255,255,255,0.4); }
+    .bc-gold .bc-stat-label { color:rgba(255,255,255,0.7); }
+
+    /* Accent line top on some cards */
+    .bc-accent-top::before {
+      content:'';
+      position:absolute; top:0; left:1.8rem; right:1.8rem;
+      height:2px; background:var(--gold);
+      border-radius:0 0 2px 2px;
+    }
+    .bc-gold.bc-accent-top::before { background:rgba(255,255,255,0.4); }
+
+    /* ================================================================
+       PERSON — Sven Vosshans
+    ================================================================ */
+    #sven { background: var(--white); }
     .sven-grid {
-      display:grid; grid-template-columns:1fr 1fr;
-      gap: clamp(3rem,5vw,6rem); align-items:center;
+      display:grid; grid-template-columns:5fr 7fr;
+      gap: clamp(3rem,5vw,7rem); align-items:center;
     }
+    @media(max-width:860px){ .sven-grid{grid-template-columns:1fr; gap:3rem;} }
+
     .sven-photo-wrap { position:relative; }
     .sven-photo {
-      width:100%; aspect-ratio:3/4; object-fit:cover;
-      border-radius:var(--radius);
-      filter: grayscale(8%);
+      width:100%; aspect-ratio:3/4; object-fit:cover; object-position:top;
+      border-radius: var(--radius-lg);
     }
-    /* Gold frame accent */
+    /* Gold corner accent */
     .sven-photo-wrap::before {
       content:''; position:absolute;
-      top:1.2rem; left:-1.2rem;
-      width:55%; height:55%;
-      border: 2px solid var(--gold);
-      border-radius:var(--radius);
-      z-index:0;
+      bottom:-1.5rem; right:-1.5rem;
+      width:60%; height:60%;
+      border: 1.5px solid var(--gold);
+      border-radius:var(--radius-lg);
+      z-index:0; opacity:0.4;
     }
     .sven-photo-wrap .sven-photo { position:relative; z-index:1; }
-    .sven-quote-badge {
-      position:absolute; bottom:1.5rem; right:-1.5rem; z-index:2;
+    .sven-badge {
+      position:absolute; top:1.5rem; right:-1.5rem; z-index:2;
       background:var(--gold); color:var(--white);
-      padding:1.2rem 1.4rem;
-      border-radius:var(--radius);
-      max-width:200px;
-      box-shadow: 0 8px 32px rgba(184,134,11,0.3);
+      padding:1.1rem 1.3rem; border-radius:var(--radius-lg);
+      max-width:180px;
+      box-shadow:0 12px 40px rgba(184,134,11,0.35);
     }
-    .sven-quote-badge p { font-size:0.78rem; font-style:italic; line-height:1.5; margin-bottom:0.5rem; }
-    .sven-quote-badge strong { font-size:0.65rem; letter-spacing:0.1em; text-transform:uppercase; display:block; }
+    .sven-badge p { font-size:0.75rem; font-family:var(--font-display); font-style:italic; line-height:1.5; margin-bottom:0.4rem; }
+    .sven-badge strong { font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.1em; text-transform:uppercase; opacity:0.8; display:block; }
+    @media(max-width:860px){
+      .sven-photo-wrap::before { display:none; }
+      .sven-badge { right:0; top:auto; bottom:1rem; }
+    }
 
     .sven-text h2 { margin-bottom:1rem; }
-    .sven-text > p { color:var(--text-mid); margin-bottom:1rem; }
-    .sven-name-block {
+    .sven-text > p { color:var(--text-mid); margin-bottom:1rem; font-size:0.95rem; }
+    .sven-signature {
       display:flex; align-items:center; gap:1rem;
       margin-top:2rem; padding-top:2rem;
       border-top:1px solid var(--border);
     }
-    .sven-initials {
+    .sven-avatar {
       width:52px; height:52px; flex-shrink:0;
       background:var(--gold); color:var(--white);
       border-radius:50%; display:flex; align-items:center; justify-content:center;
-      font-family:var(--font-display); font-size:1.1rem; font-weight:700;
+      font-family:var(--font-display); font-size:1.2rem; font-weight:700;
     }
-    .sven-role { font-size:0.75rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--text-muted); }
-    .sven-fullname { font-weight:600; color:var(--text); }
+    .sven-name { font-weight:600; color:var(--text); }
+    .sven-role { font-size:0.72rem; letter-spacing:0.05em; text-transform:uppercase; color:var(--text-muted); }
+    .sven-btns { display:flex; gap:1rem; flex-wrap:wrap; margin-top:2rem; }
 
-    @media(max-width:860px){
-      .sven-grid{grid-template-columns:1fr;}
-      .sven-photo-wrap::before{display:none;}
-      .sven-quote-badge{right:0;}
-    }
-
-    /* ============================================================
-       VALUES  (icon style: clean numbered squares)
-       ============================================================ */
-    #werte { background: var(--white); }
-    .werte-header { text-align:center; margin-bottom:clamp(2.5rem,4vw,4rem); }
-    .werte-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem; }
-    @media(max-width:900px){ .werte-grid{grid-template-columns:1fr 1fr;} }
-    @media(max-width:500px){ .werte-grid{grid-template-columns:1fr;} }
-
-    .wert-card {
-      padding:2rem 1.5rem;
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      transition:var(--transition);
-      position:relative;
-      background:var(--white);
-    }
-    .wert-card:hover { border-color:var(--gold); box-shadow:0 4px 24px rgba(184,134,11,0.1); transform:translateY(-4px); }
-    /* Icon style: Roman numeral inside thin circle */
-    .wert-num {
-      width:44px; height:44px;
-      border: 1.5px solid var(--gold);
-      border-radius:50%;
-      display:flex; align-items:center; justify-content:center;
-      font-family:var(--font-display); font-size:1rem; font-weight:700;
-      color:var(--gold);
-      margin-bottom:1.2rem;
-    }
-    .wert-title { font-family:var(--font-display); font-size:1.05rem; color:var(--text); margin-bottom:0.5rem; }
-    .wert-desc { font-size:0.84rem; color:var(--text-mid); line-height:1.6; }
-
-    /* ============================================================
-       SERVICES
-       ============================================================ */
-    #leistungen { background:var(--stone); }
-    .services-header {
+    /* ================================================================
+       SERVICES — Accordion
+    ================================================================ */
+    #leistungen { background:var(--white); }
+    .svc-header {
       display:flex; align-items:flex-end; justify-content:space-between;
       margin-bottom:clamp(2.5rem,4vw,4rem); gap:2rem; flex-wrap:wrap;
     }
-    .services-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
-    @media(max-width:860px){ .services-grid{grid-template-columns:1fr;} }
+    .svc-header p { max-width:340px; color:var(--text-muted); font-size:0.9rem; }
 
-    .svc-card {
-      background:var(--white); border-radius:var(--radius);
-      overflow:hidden; transition:var(--transition);
-      border:1px solid var(--border);
-    }
-    .svc-card:hover { transform:translateY(-5px); box-shadow:0 12px 40px rgba(0,0,0,0.1); border-color:var(--gold); }
-    .svc-img { aspect-ratio:16/9; overflow:hidden; }
-    .svc-img img { width:100%; height:100%; object-fit:cover; transition:transform 0.6s ease; }
-    .svc-card:hover .svc-img img { transform:scale(1.05); }
-    .svc-body { padding:1.8rem; }
-    .svc-tag { font-family:var(--font-mono); font-size:0.6rem; letter-spacing:0.18em; color:var(--gold); text-transform:uppercase; margin-bottom:0.6rem; }
-    .svc-body h3 { margin-bottom:0.7rem; font-size:1.2rem; }
-    .svc-body p { color:var(--text-mid); font-size:0.88rem; margin-bottom:1.2rem; }
-    .svc-list { display:flex; flex-direction:column; gap:0.4rem; }
-    .svc-list li { font-size:0.82rem; color:var(--text-mid); display:flex; align-items:flex-start; gap:8px; }
-    .svc-list li::before { content:''; display:block; width:14px; height:1px; background:var(--gold); margin-top:0.7em; flex-shrink:0; }
+    .acc-list { border-top:1px solid var(--border); }
 
-    /* ============================================================
-       HVO SEKTION — eigene große Sektion
-       ============================================================ */
-    #hvo {
-      background: var(--accent-bg);
-      position:relative; overflow:hidden;
+    .acc-item {
+      border-bottom:1px solid var(--border);
+      overflow:hidden;
     }
-    /* Background texture lines */
-    #hvo::before {
-      content:''; position:absolute; inset:0;
-      background: repeating-linear-gradient(
-        -45deg,
-        transparent, transparent 40px,
-        rgba(255,255,255,0.015) 40px,
-        rgba(255,255,255,0.015) 41px
-      );
-      pointer-events:none;
-    }
-    .hvo-grid {
-      display:grid; grid-template-columns:1fr 1fr;
-      gap:clamp(3rem,5vw,6rem); align-items:center;
-      position:relative; z-index:1;
-    }
-    @media(max-width:860px){ .hvo-grid{grid-template-columns:1fr;} }
 
-    .hvo-visual {
+    .acc-trigger {
+      width:100%; display:flex; align-items:center; gap:2rem;
+      padding:1.8rem 0; cursor:pointer; background:none;
+      text-align:left; transition:color var(--t);
       position:relative;
     }
-    .hvo-img-main {
-      width:100%; aspect-ratio:4/3; object-fit:cover;
-      border-radius:var(--radius);
-      border:1px solid rgba(255,255,255,0.08);
+    .acc-trigger:hover .acc-title { color:var(--gold); }
+
+    .acc-num {
+      font-family:var(--font-display); font-size:1rem; font-weight:700;
+      color:var(--gold); opacity:0.5; flex-shrink:0; width:2rem;
+      transition:opacity var(--t);
     }
-    .hvo-badge {
-      position:absolute; top:-1.2rem; right:-1.2rem;
+    .acc-item.open .acc-num { opacity:1; }
+
+    .acc-title {
+      font-family:var(--font-display); font-size:clamp(1.5rem,3vw,2.2rem);
+      font-weight:600; color:var(--text); flex:1; transition:color var(--t);
+      line-height:1.15;
+    }
+    .acc-item.open .acc-title { color:var(--gold); }
+
+    .acc-sub {
+      font-family:var(--font-mono); font-size:0.58rem;
+      letter-spacing:0.15em; text-transform:uppercase;
+      color:var(--text-muted); flex-shrink:0;
+      display:none;
+    }
+    @media(min-width:600px){ .acc-sub{display:block;} }
+
+    .acc-icon {
+      width:38px; height:38px; flex-shrink:0;
+      border:1px solid var(--border); border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      transition:border-color var(--t), background var(--t), transform 0.4s var(--ease);
+    }
+    .acc-icon svg { width:14px; height:14px; stroke:var(--text-muted); transition:stroke var(--t); }
+    .acc-item.open .acc-icon {
+      background:var(--gold); border-color:var(--gold);
+      transform:rotate(45deg);
+    }
+    .acc-item.open .acc-icon svg { stroke:var(--white); }
+
+    /* Panel */
+    .acc-panel {
+      display:grid; grid-template-rows:0fr;
+      transition:grid-template-rows 0.45s var(--ease);
+    }
+    .acc-item.open .acc-panel { grid-template-rows:1fr; }
+    .acc-panel-inner { overflow:hidden; }
+    .acc-panel-body {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:clamp(2rem,4vw,5rem);
+      padding-bottom:3rem;
+      align-items:start;
+    }
+    @media(max-width:700px){ .acc-panel-body{grid-template-columns:1fr;} }
+
+    .acc-img {
+      aspect-ratio:4/3; overflow:hidden;
+      border-radius:var(--radius-lg); position:relative;
+    }
+    .acc-img img { width:100%; height:100%; object-fit:cover; transition:transform 0.6s var(--ease); }
+    .acc-item.open .acc-img img { transform:scale(1.03); }
+
+    .acc-content p { color:var(--text-mid); font-size:0.93rem; margin-bottom:1.5rem; line-height:1.75; }
+    .acc-svc-list { display:flex; flex-direction:column; gap:0; }
+    .acc-svc-list li {
+      font-size:0.85rem; color:var(--text-mid);
+      display:flex; align-items:center; gap:12px;
+      padding:0.7rem 0; border-bottom:1px solid var(--border);
+    }
+    .acc-svc-list li:last-child { border-bottom:none; }
+    .acc-svc-list li::before {
+      content:''; display:block; width:20px; height:1px;
+      background:var(--gold); flex-shrink:0;
+    }
+
+    /* ================================================================
+       HVO — Nachhaltigkeit (Dark Statement)
+    ================================================================ */
+    #hvo {
+      background: var(--dark);
+      position:relative; overflow:hidden;
+    }
+    /* Subtle radial glow */
+    #hvo::before {
+      content:''; position:absolute;
+      top:-20%; left:60%; width:70vw; height:70vw;
+      background: radial-gradient(circle, rgba(184,134,11,0.08) 0%, transparent 65%);
+      pointer-events:none;
+    }
+
+    .hvo-top {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:clamp(3rem,5vw,6rem);
+      align-items:end;
+      margin-bottom:clamp(3rem,5vw,5rem);
+      position:relative; z-index:1;
+    }
+    @media(max-width:860px){ .hvo-top{grid-template-columns:1fr; gap:1.5rem;} }
+
+    .hvo-headline h2 { color:var(--white); }
+    .hvo-headline p { color:rgba(255,255,255,0.5); font-size:0.92rem; margin-top:1rem; max-width:400px; }
+
+    /* Big stat anchor */
+    .hvo-big-stat {
+      text-align:right;
+    }
+    @media(max-width:860px){ .hvo-big-stat{text-align:left;} }
+    .hvo-big-num {
+      font-family:var(--font-display); font-size:clamp(5rem,12vw,10rem);
+      font-weight:700; line-height:0.9; color:var(--gold-light);
+      display:block; letter-spacing:-0.03em;
+    }
+    .hvo-big-label {
+      font-family:var(--font-mono); font-size:0.6rem;
+      letter-spacing:0.2em; text-transform:uppercase;
+      color:rgba(255,255,255,0.35); display:block; margin-top:0.5rem;
+    }
+
+    /* Divider */
+    .hvo-divider {
+      height:1px; background:rgba(255,255,255,0.07);
+      margin-bottom:clamp(2.5rem,4vw,4rem);
+      position:relative; z-index:1;
+    }
+
+    /* Bottom grid: image + facts */
+    .hvo-bottom {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:clamp(2rem,4vw,4rem);
+      position:relative; z-index:1;
+      align-items:start;
+    }
+    @media(max-width:860px){ .hvo-bottom{grid-template-columns:1fr;} }
+
+    .hvo-img-wrap { position:relative; }
+    .hvo-img {
+      width:100%; aspect-ratio:16/10; object-fit:cover;
+      border-radius:var(--radius-lg);
+      opacity:0.75;
+    }
+    .hvo-img-badge {
+      position:absolute; bottom:1.2rem; left:1.2rem;
       background:var(--gold); color:var(--white);
-      width:100px; height:100px; border-radius:50%;
-      display:flex; flex-direction:column; align-items:center; justify-content:center;
-      text-align:center; box-shadow:0 8px 32px rgba(184,134,11,0.4);
+      padding:0.7rem 1.2rem; border-radius:2rem;
+      font-family:var(--font-mono); font-size:0.6rem;
+      letter-spacing:0.14em; text-transform:uppercase;
+      display:flex; align-items:center; gap:8px;
+      box-shadow:0 8px 28px rgba(184,134,11,0.4);
     }
-    .hvo-badge strong { font-family:var(--font-display); font-size:1.1rem; line-height:1; }
-    .hvo-badge span { font-family:var(--font-mono); font-size:0.52rem; letter-spacing:0.1em; text-transform:uppercase; margin-top:2px; }
+    .hvo-img-badge::before {
+      content:''; width:8px; height:8px; border-radius:50%;
+      background:var(--white); display:block; flex-shrink:0;
+      animation: pulse 2s ease infinite;
+    }
+    @keyframes pulse {
+      0%,100%{opacity:1; transform:scale(1);}
+      50%{opacity:0.5; transform:scale(0.7);}
+    }
 
-    .hvo-text .label { margin-bottom:1rem; }
-    .hvo-text .label { color:var(--gold-light); }
-    .hvo-text .label::before { background:var(--gold-light); }
-    .hvo-text h2 { color:var(--white); margin-bottom:1.2rem; }
-    .hvo-text > p { color:rgba(255,255,255,0.65); margin-bottom:1.8rem; }
-
-    .hvo-facts { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:2rem; }
+    /* Fact cards */
+    .hvo-facts {
+      display:grid; grid-template-columns:1fr 1fr; gap:1px;
+      background:rgba(255,255,255,0.07);
+      border-radius:var(--radius-lg); overflow:hidden;
+    }
     .hvo-fact {
-      background:rgba(255,255,255,0.05);
-      border:1px solid rgba(255,255,255,0.1);
-      border-radius:var(--radius); padding:1.2rem;
+      background:var(--dark-mid);
+      padding:1.6rem 1.4rem;
+      transition:background var(--t);
     }
-    /* Icon style for HVO: thin icon with top gold line */
-    .hvo-fact-icon {
-      width:36px; height:2px; background:var(--gold);
-      margin-bottom:0.8rem;
+    .hvo-fact:hover { background:var(--dark-soft); }
+    .hvo-fact-num {
+      font-family:var(--font-display); font-size:2rem;
+      font-weight:700; color:var(--gold-light); line-height:1;
+      margin-bottom:0.4rem; display:block;
     }
-    .hvo-fact h4 { font-family:var(--font-display); font-size:0.95rem; color:var(--white); margin-bottom:0.3rem; }
-    .hvo-fact p { font-size:0.8rem; color:rgba(255,255,255,0.55); line-height:1.5; }
+    .hvo-fact h4 {
+      font-family:var(--font-body); font-size:0.8rem;
+      font-weight:500; color:var(--white); margin-bottom:0.3rem;
+    }
+    .hvo-fact p { font-size:0.75rem; color:rgba(255,255,255,0.4); line-height:1.55; }
 
-    /* ============================================================
-       PORTFOLIO
-       ============================================================ */
+    /* ================================================================
+       IMPRESSIONEN — Portfolio
+    ================================================================ */
     #impressionen { background:var(--white); }
     .port-header { text-align:center; margin-bottom:clamp(2.5rem,4vw,4rem); }
     .port-header h2 { margin-bottom:0.8rem; }
-    .port-header p { color:var(--text-muted); max-width:480px; margin:0 auto; }
+    .port-header p { color:var(--text-muted); max-width:460px; margin:0 auto; font-size:0.9rem; }
 
     .port-grid {
       display:grid;
       grid-template-columns:repeat(3,1fr);
-      grid-auto-rows:220px;
+      grid-auto-rows: 230px;
       gap:10px;
     }
     @media(max-width:700px){ .port-grid{grid-template-columns:1fr 1fr; grid-auto-rows:160px;} }
-    .port-item { overflow:hidden; border-radius:var(--radius); position:relative; cursor:pointer; }
+    .port-item { overflow:hidden; border-radius:var(--radius-lg); position:relative; cursor:pointer; }
     .port-item:nth-child(1),.port-item:nth-child(5){ grid-column:span 2; }
-    .port-item img { width:100%; height:100%; object-fit:cover; transition:transform 0.6s ease; }
+    .port-item img { width:100%; height:100%; object-fit:cover; transition:transform 0.6s var(--ease); }
     .port-item:hover img { transform:scale(1.07); }
     .port-ov {
       position:absolute; inset:0;
-      background:linear-gradient(to top,rgba(25,27,20,0.6) 0%,transparent 55%);
-      opacity:0; transition:opacity var(--transition);
-      display:flex; align-items:flex-end; padding:1rem;
+      background:linear-gradient(to top,rgba(18,20,14,0.65) 0%,transparent 55%);
+      opacity:0; transition:opacity var(--t);
+      display:flex; align-items:flex-end; padding:1.2rem;
     }
     .port-item:hover .port-ov { opacity:1; }
-    .port-ov-icon {
-      margin-left:auto;
-      width:36px; height:36px;
+    .port-expand {
+      margin-left:auto; width:38px; height:38px;
       background:var(--gold); border-radius:50%;
       display:flex; align-items:center; justify-content:center;
     }
-    /* Icon: simple plus → expand feel */
-    .port-ov-icon::before,.port-ov-icon::after { content:''; position:absolute; background:var(--white); border-radius:2px; }
-    .port-ov-icon::before { width:14px; height:1.5px; }
-    .port-ov-icon::after  { width:1.5px; height:14px; }
-
-    /* ============================================================
-       QUOTE
-       ============================================================ */
-    #zitat { background:var(--stone); padding:clamp(3.5rem,6vw,6rem) 0; text-align:center; }
-    .zitat-mark {
-      font-family:var(--font-display); font-size:6rem; color:var(--gold);
-      opacity:0.2; line-height:0.5; display:block; margin-bottom:1rem;
+    .port-expand svg { width:14px; height:14px; stroke:white; }
+    @media(max-width:560px){
+      .port-grid { grid-template-columns:1fr; grid-auto-rows:200px; }
+      .port-item:nth-child(1),.port-item:nth-child(5){ grid-column:span 1; }
     }
-    blockquote { max-width:680px; margin:0 auto; }
-    blockquote p { font-family:var(--font-display); font-size:clamp(1.25rem,2.2vw,1.75rem); font-style:italic; color:var(--text); line-height:1.45; margin-bottom:1.2rem; }
-    blockquote cite { font-family:var(--font-mono); font-size:0.65rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); font-style:normal; }
 
-    /* ============================================================
-       CONTACT
-       ============================================================ */
+    /* ================================================================
+       ZITAT
+    ================================================================ */
+    #zitat {
+      background: var(--dark); padding: clamp(4rem,7vw,8rem) 0;
+      text-align:center; position:relative; overflow:hidden;
+    }
+    #zitat::before {
+      content:'"';
+      font-family:var(--font-display); font-size:30rem; font-weight:700;
+      position:absolute; top:-8rem; left:50%; transform:translateX(-50%);
+      color:rgba(255,255,255,0.02); line-height:1; pointer-events:none;
+    }
+    blockquote { max-width:700px; margin:0 auto; position:relative; z-index:1; }
+    blockquote p {
+      font-family:var(--font-display); font-size:clamp(1.4rem,2.5vw,2rem);
+      font-style:italic; color:var(--white); line-height:1.5; margin-bottom:1.5rem;
+    }
+    blockquote cite {
+      font-family:var(--font-mono); font-size:0.62rem;
+      letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-light);
+      font-style:normal;
+    }
+
+    /* ================================================================
+       KONTAKT
+    ================================================================ */
     #kontakt { background:var(--off-white); }
-    .kontakt-grid { display:grid; grid-template-columns:1fr 1fr; gap:clamp(3rem,5vw,6rem); }
+    .kontakt-grid { display:grid; grid-template-columns:1fr 1.2fr; gap:clamp(3rem,5vw,6rem); }
     @media(max-width:860px){ .kontakt-grid{grid-template-columns:1fr;} }
 
     .kontakt-info h2 { margin-bottom:1rem; }
-    .kontakt-info > p { color:var(--text-mid); margin-bottom:2rem; }
-    .k-items { display:flex; flex-direction:column; gap:1rem; }
+    .kontakt-info > p { color:var(--text-mid); margin-bottom:2rem; font-size:0.95rem; }
+    .k-items { display:flex; flex-direction:column; gap:0.8rem; }
     .k-item {
-      display:flex; align-items:flex-start; gap:1rem;
-      padding:1.2rem; background:var(--white);
-      border:1px solid var(--border); border-radius:var(--radius);
-      transition:var(--transition);
+      display:flex; align-items:center; gap:1rem;
+      padding:1rem 1.2rem;
+      background:var(--white); border:1px solid var(--border);
+      border-radius:var(--radius-lg); transition:border-color var(--t);
     }
     .k-item:hover { border-color:var(--gold); }
-    /* Icon style: thin bracket symbol */
     .k-icon {
-      width:40px; height:40px; flex-shrink:0;
-      border:1.5px solid var(--gold-pale);
-      background:var(--gold-pale);
-      border-radius:4px;
-      display:flex; align-items:center; justify-content:center;
-      color:var(--gold);
+      width:42px; height:42px; flex-shrink:0;
+      background:var(--gold-pale); border-radius:10px;
+      display:flex; align-items:center; justify-content:center; color:var(--gold);
     }
-    .k-icon svg { width:18px; height:18px; }
-    .k-lbl { font-family:var(--font-mono); font-size:0.6rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold); margin-bottom:0.2rem; }
+    .k-icon svg { width:18px; height:18px; stroke:currentColor; fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+    .k-lbl { font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); margin-bottom:0.2rem; }
     .k-val { font-size:0.93rem; font-weight:500; color:var(--text); }
     .k-val a:hover { color:var(--gold); }
 
     /* Form */
-    .form-box { background:var(--white); border:1px solid var(--border); border-radius:var(--radius); padding:2.2rem; }
-    .form-box h3 { margin-bottom:0.4rem; }
-    .form-box > p { color:var(--text-muted); font-size:0.85rem; margin-bottom:1.8rem; }
+    .form-box {
+      background:var(--white); border:1px solid var(--border);
+      border-radius:var(--radius-lg); padding:clamp(1.8rem,3vw,2.8rem);
+    }
+    .form-box h3 { margin-bottom:0.3rem; }
+    .form-box > p { color:var(--text-muted); font-size:0.83rem; margin-bottom:1.8rem; }
     .fg { margin-bottom:1rem; }
-    .fg label { display:block; font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted); margin-bottom:0.4rem; }
+    .fg label { display:block; font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); margin-bottom:0.5rem; font-family:var(--font-mono); }
     .fg input,.fg textarea,.fg select {
-      width:100%; padding:0.8rem 1rem;
-      border:1.5px solid var(--border);
-      border-radius:var(--radius); background:var(--white);
-      font-family:var(--font-body); font-size:0.92rem; color:var(--text);
-      transition:border-color var(--transition);
+      width:100%; padding:0.85rem 1rem;
+      border:1.5px solid var(--border); border-radius:var(--radius);
+      background:var(--off-white); font-family:var(--font-body);
+      font-size:0.9rem; color:var(--text); transition:border-color var(--t);
       appearance:none;
     }
     .fg input::placeholder,.fg textarea::placeholder { color:var(--text-muted); }
-    .fg select option { background:var(--white); }
-    .fg input:focus,.fg textarea:focus,.fg select:focus { outline:none; border-color:var(--gold); }
+    .fg input:focus,.fg textarea:focus,.fg select:focus { outline:none; border-color:var(--gold); background:var(--white); }
     .fg textarea { min-height:120px; resize:vertical; }
     .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
     @media(max-width:560px){ .form-row{grid-template-columns:1fr;} }
-    .btn-submit { width:100%; justify-content:center; padding:1rem; margin-top:0.5rem; font-size:0.85rem; }
-    .form-ok { display:none; text-align:center; padding:1.8rem; background:rgba(184,134,11,0.06); border:1px solid var(--border-gold); border-radius:var(--radius); color:var(--gold); }
+    .btn-submit { width:100%; justify-content:center; padding:1rem; margin-top:0.5rem; font-size:0.82rem; border-radius:var(--radius-lg); }
+    .form-ok { display:none; text-align:center; padding:1.8rem; background:rgba(184,134,11,0.06); border:1px solid rgba(184,134,11,0.2); border-radius:var(--radius-lg); color:var(--gold); }
 
-    /* ============================================================
+    /* ================================================================
        FOOTER
-       ============================================================ */
-    #ftr { background:var(--accent-bg); padding:clamp(3rem,5vw,5rem) 0 0; border-top:3px solid var(--gold); }
-    .ftr-grid { display:grid; grid-template-columns:2fr 1fr 1fr; gap:3.5rem; padding-bottom:2.5rem; }
+    ================================================================ */
+    #ftr { background:var(--dark); padding:clamp(3.5rem,5vw,6rem) 0 0; border-top:2px solid var(--gold); }
+    .ftr-grid { display:grid; grid-template-columns:2fr 1fr 1fr; gap:3.5rem; padding-bottom:3rem; }
     @media(max-width:860px){ .ftr-grid{grid-template-columns:1fr; gap:2rem;} }
-    .ftr-logo-main { font-family:var(--font-display); font-size:1.5rem; color:var(--white); margin-bottom:0.2rem; }
+    .ftr-logo { font-family:var(--font-display); font-size:1.6rem; font-weight:700; color:var(--white); margin-bottom:0.2rem; }
     .ftr-logo-sub { font-family:var(--font-mono); font-size:0.5rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-light); margin-bottom:1rem; }
-    .ftr-brand p { font-size:0.83rem; color:rgba(255,255,255,0.5); max-width:260px; line-height:1.7; }
-    .ftr-col h4 { font-family:var(--font-mono); font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-light); margin-bottom:1rem; }
-    .ftr-col ul { display:flex; flex-direction:column; gap:0.6rem; }
-    .ftr-col ul li a { font-size:0.83rem; color:rgba(255,255,255,0.5); transition:color var(--transition); }
+    .ftr-brand p { font-size:0.83rem; color:rgba(255,255,255,0.4); max-width:260px; line-height:1.75; }
+    .ftr-tags { display:flex; gap:0.5rem; flex-wrap:wrap; margin-top:1.2rem; }
+    .ftr-tag { background:rgba(184,134,11,0.12); border:1px solid rgba(184,134,11,0.25); color:var(--gold-light); padding:0.25rem 0.8rem; border-radius:2rem; font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.1em; text-transform:uppercase; }
+    .ftr-col h4 { font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-light); margin-bottom:1.2rem; }
+    .ftr-col ul { display:flex; flex-direction:column; gap:0.7rem; }
+    .ftr-col ul li a { font-size:0.83rem; color:rgba(255,255,255,0.4); transition:color var(--t); }
     .ftr-col ul li a:hover { color:var(--gold-light); }
-    .ftr-bottom { border-top:1px solid rgba(255,255,255,0.08); padding:1.4rem 0; display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; }
-    .ftr-bottom p { font-size:0.73rem; color:rgba(255,255,255,0.35); }
-    .ftr-legal { display:flex; gap:1.4rem; }
-    .ftr-legal a { font-size:0.73rem; color:rgba(255,255,255,0.35); transition:color var(--transition); }
+    .ftr-bottom {
+      border-top:1px solid rgba(255,255,255,0.06);
+      padding:1.4rem 0;
+      display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;
+    }
+    .ftr-bottom p { font-size:0.72rem; color:rgba(255,255,255,0.28); }
+    .ftr-legal { display:flex; gap:1.5rem; }
+    .ftr-legal a { font-size:0.72rem; color:rgba(255,255,255,0.28); transition:color var(--t); }
     .ftr-legal a:hover { color:var(--gold-light); }
 
-    /* ============================================================
-       SCROLL REVEAL
-       ============================================================ */
-    @keyframes fu { from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);} }
-    .rv { }
-    .rv.in { }
-      
-
-    /* ============================================================
-       LIGHTBOX
-       ============================================================ */
-    .lb { position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.93); display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity 0.3s; }
-    .lb.open { opacity:1; pointer-events:all; }
-    .lb img { max-width:90vw; max-height:88vh; border-radius:var(--radius); }
-    .lb-close { position:absolute; top:1.5rem; right:1.5rem; width:42px; height:42px; background:rgba(255,255,255,0.12); border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--white); font-size:1.2rem; transition:background var(--transition); }
-    .lb-close:hover { background:var(--gold); }
-
-    /* ============================================================
-       MISC
-       ============================================================ */
-    .divider { height:1px; background:var(--border); }
-    .text-gold { color:var(--gold); }
-
-    /* Stripes — decorative */
-    .stripe-gold { background:var(--gold); color:var(--white); padding:0.9rem 0; text-align:center; }
-    .stripe-gold p { font-family:var(--font-mono); font-size:0.65rem; letter-spacing:0.18em; text-transform:uppercase; }
-  
-    /* ── MOBILE CRITICAL FIXES ── */
-
-    /* Hero fallback if image doesn't load */
-    .hero-bg::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: var(--accent-bg);
-      z-index: -1;
-    }
-
-    /* Ensure hero text is always visible */
-    .hero-text h1,
-    .hero-eyebrow,
-    .hero-lead { color: var(--white) !important; }
-
-    @media (max-width: 768px) {
-      /* Header */
-      #hdr.scrolled { background: rgba(43,45,38,0.98) !important; }
-
-      /* Hero */
-      .hero-body { padding-top: calc(var(--hh) + 1rem); padding-bottom: 2rem; min-height: 85vh; display:flex; align-items:center; }
-      .hero-text { max-width: 100%; }
-      .hero-text h1 { font-size: clamp(2rem, 8vw, 3rem); }
-      .hero-lead { font-size: 0.95rem; }
-      .hero-btns { flex-direction: column; }
-      .hero-btns .btn { text-align: center; justify-content: center; }
-
-      /* Stats box */
-      .stats-box { grid-template-columns: 1fr 1fr; }
-      .stat { padding: 1rem; }
-      .stat-num { font-size: 1.5rem; }
-
-      /* Sven section */
-      .sven-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .sven-photo { aspect-ratio: 4/5; max-height: 500px; width: 100%; object-fit: cover; object-position: top; }
-      .sven-photo-wrap::before { display: none; }
-      .sven-quote-badge { right: 0; bottom: 0; position: relative; margin-top: 1rem; max-width: 100%; }
-      .sven-name-block { flex-direction: column; align-items: flex-start; }
-
-      /* Values */
-      .werte-grid { grid-template-columns: 1fr; }
-
-      /* Services */
-      .services-header { flex-direction: column; gap: 1rem; }
-      .services-grid { grid-template-columns: 1fr; }
-
-      /* HVO */
-      .hvo-grid { grid-template-columns: 1fr; }
-      .hvo-badge { top: auto; right: 1rem; bottom: 1rem; }
-      .hvo-facts { grid-template-columns: 1fr; }
-
-      /* Portfolio */
-      .port-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 140px; }
-      .port-item:nth-child(1),
-      .port-item:nth-child(5) { grid-column: span 2; }
-
-      /* Contact */
-      .kontakt-grid { grid-template-columns: 1fr; }
-      .form-row { grid-template-columns: 1fr; }
-      .form-box { padding: 1.4rem; }
-
-      /* Footer */
-      .ftr-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .ftr-bottom { flex-direction: column; text-align: center; }
-
-      /* General spacing */
-      .sp { padding: clamp(3rem, 6vw, 5rem) 0; }
-      .container { padding: 0 1.2rem; }
-    }
-
-    @media (max-width: 420px) {
-      .stats-box { grid-template-columns: 1fr 1fr; }
-      .stat-num { font-size: 1.3rem; }
-      .werte-grid { grid-template-columns: 1fr; }
-      .port-grid { grid-template-columns: 1fr; grid-auto-rows: 200px; }
-      .port-item:nth-child(1),
-      .port-item:nth-child(5) { grid-column: span 1; }
-    }
-
-  
-    /* ── FOOTER FIX ── */
-    #ftr {
-      position: relative !important;
-      z-index: 1 !important;
-      background: #2B2D26;
-      border-top: 3px solid #B8860B;
-      padding: 0;
-    }
-    #ftr .ftr-bottom {
-      padding: 1.2rem 0;
-      border-top: none;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-    #ftr .ftr-bottom p {
-      font-size: 0.72rem;
-      color: rgba(255,255,255,0.35);
-      line-height: 1.5;
-    }
-    #ftr .ftr-legal a {
-      font-size: 0.72rem;
-      color: rgba(255,255,255,0.35);
-    }
-    #ftr .ftr-legal {
-      display: flex;
-      gap: 1.4rem;
-    }
-
-    /* ── MOBILE NAV FIX ── */  
-    nav#sitenav {
-      z-index: 998 !important;
-    }
-    
-    /* ── ALL SECTIONS visible ── */
-    section, main, footer, header {
-      position: relative;
-    }
-
-  
-    @media (min-width: 861px) {
-      nav {
-        visibility: visible !important;
-        opacity: 1 !important;
-        pointer-events: all !important;
-        position: static !important;
-        display: flex !important;
-        background: none !important;
-        backdrop-filter: none !important;
-        flex-direction: row !important;
-        gap: 2.2rem !important;
-      }
-    }
-
-    /* ── MOBILE: hide top nav, show bottom bar ── */
-    @media (max-width: 860px) {
-      nav {
-        display: none !important;
-      }
-      .ham {
-        display: none !important;
-      }
-      /* Bottom navigation bar */
+    /* ================================================================
+       MOBILE BOTTOM NAV
+    ================================================================ */
+    @media(max-width:860px){
       #mobile-nav {
-        display: flex;
-        position: fixed;
-        bottom: 0; left: 0; right: 0;
-        background: rgba(43,45,38,0.97);
-        backdrop-filter: blur(16px);
-        border-top: 1px solid rgba(184,134,11,0.3);
-        z-index: 1000;
-        padding: 0.5rem 0;
-        padding-bottom: calc(0.5rem + env(safe-area-inset-bottom));
+        display:flex; position:fixed;
+        bottom:0; left:0; right:0;
+        background:rgba(24,26,20,0.97);
+        backdrop-filter:blur(20px);
+        border-top:1px solid rgba(184,134,11,0.25);
+        z-index:1000; padding:0.5rem 0;
+        padding-bottom:calc(0.5rem + env(safe-area-inset-bottom));
       }
       #mobile-nav a {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 3px;
-        color: rgba(255,255,255,0.5);
-        font-family: var(--font-mono);
-        font-size: 0.52rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        text-decoration: none;
-        padding: 0.4rem 0;
-        transition: color 0.2s ease;
+        flex:1; display:flex; flex-direction:column; align-items:center; gap:3px;
+        color:rgba(255,255,255,0.45); font-family:var(--font-mono);
+        font-size:0.5rem; letter-spacing:0.08em; text-transform:uppercase;
+        padding:0.4rem 0; transition:color 0.2s;
       }
-      #mobile-nav a:hover,
-      #mobile-nav a.active { color: var(--gold-light); }
-      #mobile-nav a svg { width: 20px; height: 20px; }
-      /* Add padding to page so content not hidden behind bottom bar */
-      body { padding-bottom: 70px; }
+      #mobile-nav a:hover,#mobile-nav a.active { color:var(--gold-light); }
+      #mobile-nav a svg { width:20px; height:20px; }
+      body { padding-bottom:68px; }
     }
-    @media (min-width: 861px) {
-      #mobile-nav { display: none; }
-    }
-</style>
+
+    /* ================================================================
+       LIGHTBOX
+    ================================================================ */
+    .lb { position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.93); display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity 0.3s; }
+    .lb.open { opacity:1; pointer-events:all; }
+    .lb img { max-width:90vw; max-height:88vh; border-radius:var(--radius-lg); }
+    .lb-close { position:absolute; top:1.5rem; right:1.5rem; width:42px; height:42px; background:rgba(255,255,255,0.1); border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--white); transition:background var(--t); font-size:1.1rem; }
+    .lb-close:hover { background:var(--gold); }
+  </style>
 </head>
 <body>
 
-<!-- ============================================================
-     HEADER
-     ============================================================ -->
+<!-- HEADER -->
 <header id="hdr">
   <div class="container">
     <div class="hdr-inner">
@@ -737,412 +872,550 @@
       </a>
       <nav id="sitenav">
         <a href="#sven"         class="nl">Über uns</a>
+        <a href="#versprechen"  class="nl">Stärken</a>
         <a href="#leistungen"   class="nl">Leistungen</a>
         <a href="#hvo"          class="nl">Nachhaltigkeit</a>
         <a href="#impressionen" class="nl">Impressionen</a>
-        <a href="#kontakt"      class="nl btn-outline-white btn nl-cta">Kontakt</a>
+        <a href="#kontakt"      class="nl nl-cta">Kontakt</a>
       </nav>
-      
     </div>
   </div>
 </header>
 
 <main>
 
-  <!-- ============================================================
-       HERO
-       ============================================================ -->
-  <section id="hero" style="background: var(--accent-bg);">
-    <div class="hero-bg">
-      <img src="img/roh3.jpg"
-           alt="Haferkemper Bau – Rohbau Projekt" loading="eager" referrerpolicy="no-referrer" crossorigin="anonymous">
-    </div>
-    <div class="hero-body">
-      <div class="container">
-        <div class="hero-text">
-          <p class="hero-eyebrow">Bauunternehmung Haferkemper · Oelde, Westfalen</p>
-          <h1>Gebaut mit<br><em>Kopf, Herz<br>und Hand.</em></h1>
-          <p class="hero-lead">
-            Seit mehr als 75 Jahren realisieren wir Bauprojekte in Oelde und der Region
-            mit höchster Qualität, Termintreue und persönlicher Betreuung.
-          </p>
-          <div class="hero-btns">
-            <a href="#kontakt" class="btn btn-gold">Jetzt anfragen</a>
-            <a href="#leistungen" class="btn btn-outline-white">Leistungen entdecken</a>
-          </div>
-        </div>
-      </div>
-    </div>
+<!-- ================================================================
+     HERO
+================================================================ -->
+<section id="hero" style="background:var(--dark);">
+  <div class="hero-bg">
+    <img src="img/roh3.jpg" alt="Haferkemper Bau – Rohbau Projekt" loading="eager">
+  </div>
+  <div class="hero-grain"></div>
+  <span class="hero-side-label">Bauunternehmung Haferkemper · Oelde, Westfalen · Seit 1948</span>
 
-    <!-- STATS — boxed -->
+  <div class="hero-body">
     <div class="container">
-      <div class="stats-wrap">
-        <div class="stats-box">
-          <div class="stat">
-            <div class="stat-num" id="s1">75+</div>
-            <div class="stat-lbl">Jahre Erfahrung</div>
-          </div>
-          <div class="stat">
-            <div class="stat-num" id="s2">1948</div>
-            <div class="stat-lbl">Gegründet in Oelde</div>
-          </div>
-          <div class="stat">
-            <div class="stat-num" id="s3">100%</div>
-            <div class="stat-lbl">HVO Klimaneutral</div>
-          </div>
-          <div class="stat">
-            <div class="stat-num" id="s4">3</div>
-            <div class="stat-lbl">Kernleistungen</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ============================================================
-       PERSON — Sven Vosshans (früh, persönlich, groß)
-       ============================================================ -->
-  <section id="sven" class="sp">
-    <div class="container">
-      <div class="sven-grid">
-
-        <div class="sven-photo-wrap rv">
-          <!-- Using a project photo as stand-in since no headshot is available on site -->
-          <img class="sven-photo"
-               src="img/sven.jpg"
-               alt="Sven Vosshans – Geschäftsführer Bauunternehmung Haferkemper"
-               loading="lazy">
-          <div class="sven-quote-badge">
-            <p>"Mit Kopf, Herz und Hand – das ist unser Versprechen."</p>
-            <strong>Sven Vosshans · Geschäftsführer</strong>
-          </div>
-        </div>
-
-        <div class="sven-text rv d1">
-          <p class="label">Ihr direkter Ansprechpartner</p>
-          <h2>Persönlich. Kompetent. Verlässlich.</h2>
-          <p>
-            Als inhabergeführtes Unternehmen stehen bei uns noch echte Werte im Mittelpunkt.
-            Kein anonymes Büro, kein Callcenter – Sie sprechen direkt mit der Person,
-            die Ihr Bauprojekt verantwortet.
-          </p>
-          <p>
-            <strong>Dipl.-Ing. Sven Vosshans</strong> begleitet jedes Projekt persönlich –
-            von der ersten Anfrage bis zur schlüsselfertigen Übergabe.
-            Bei Bedarf übernimmt er auch die Koordination sämtlicher weiterer Gewerke.
-          </p>
-          <p>
-            Das gibt Ihnen die Sicherheit, dass Ihr Bauvorhaben in denselben Händen bleibt –
-            die Hände, die wissen, was sie tun.
-          </p>
-          <div class="sven-name-block">
-            <div class="sven-initials">SV</div>
-            <div>
-              <div class="sven-fullname">Dipl.-Ing. Sven Vosshans</div>
-              <div class="sven-role">Geschäftsführer · Bauunternehmung Haferkemper GmbH &amp; Co. KG</div>
-            </div>
-          </div>
-          <div style="margin-top:2rem; display:flex; gap:1rem; flex-wrap:wrap;">
-            <a href="#kontakt" class="btn btn-gold">Direkt anfragen</a>
-            <a href="tel:025224149" class="btn btn-outline-gold">02522 4149 anrufen</a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ============================================================
-       VALUES — clean Roman numeral style
-       ============================================================ -->
-  <section id="werte" class="sp" style="background:var(--off-white);">
-    <div class="container">
-      <div class="werte-header rv">
-        <p class="label label-center">Unsere Werte</p>
-        <h2>Was uns auszeichnet.</h2>
-      </div>
-      <div class="werte-grid">
-        <div class="wert-card rv">
-          <div class="wert-num">I</div>
-          <div class="wert-title">Qualität</div>
-          <p class="wert-desc">Wir legen größten Wert auf einwandfreie handwerkliche Ausführung. Hochwertige Qualität in fachgerechter Verarbeitung – keine Kompromisse.</p>
-        </div>
-        <div class="wert-card rv d1">
-          <div class="wert-num">II</div>
-          <div class="wert-title">Termintreue</div>
-          <p class="wert-desc">Perfekte Planung und akkurate Umsetzung garantieren fristgerechte Fertigstellung. Dank eigenem Maschinenpark reagieren wir flexibel auf Änderungen.</p>
-        </div>
-        <div class="wert-card rv d2">
-          <div class="wert-num">III</div>
-          <div class="wert-title">Zuverlässigkeit</div>
-          <p class="wert-desc">Sven Vosshans steht Ihnen persönlich als direkter Ansprechpartner zur Verfügung – von der Planung bis zur Übergabe.</p>
-        </div>
-        <div class="wert-card rv d3">
-          <div class="wert-num">IV</div>
-          <div class="wert-title">Verantwortung</div>
-          <p class="wert-desc">Von der Rohstoffauswahl bis zur Entsorgung denken wir ökologisch. Unsere gesamte Fahrzeugflotte fährt bereits mit klimaneutralem HVO 100.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ============================================================
-       SERVICES
-       ============================================================ -->
-  <section id="leistungen" class="sp">
-    <div class="container">
-      <div class="services-header">
-        <div>
-          <p class="label">Leistungen</p>
-          <h2>Rundum-Service<br>aus einer Hand.</h2>
-        </div>
-        <p style="max-width:340px; color:var(--text-mid); font-size:0.92rem;">
-          Von der Planung bis zur Fertigstellung – wir begleiten Ihr Bauvorhaben in allen Phasen.
+      <div class="hero-content">
+        <p class="hero-eyebrow">Bauunternehmung Haferkemper · Oelde, Westfalen</p>
+        <h1>Gebaut mit<br><em>Kopf, Herz<br>und Hand.</em></h1>
+        <p class="hero-lead">
+          Seit mehr als 75 Jahren realisieren wir Bauprojekte in Oelde und der Region
+          mit höchster Qualität, Termintreue und persönlicher Betreuung.
         </p>
-      </div>
-      <div class="services-grid">
-        <article class="svc-card rv">
-          <div class="svc-img">
-            <img src="img/Rohbau.jpg" alt="Rohbau" loading="lazy">
-          </div>
-          <div class="svc-body">
-            <div class="svc-tag">01 — Rohbau</div>
-            <h3>Rohbauten &amp; Ausbauhäuser</h3>
-            <p>Rohbauten und Ausbauhäuser werden auf Ihre Wünsche abgestimmt. Durch Eigenleistung bestimmen Sie den Umfang des Angebotes.</p>
-            <ul class="svc-list">
-              <li>Ein- und Mehrfamilienhäuser</li>
-              <li>An- und Umbauten</li>
-              <li>Keller</li>
-              <li>Gewerbeobjekte &amp; Industriebauten</li>
-            </ul>
-          </div>
-        </article>
-        <article class="svc-card rv d1">
-          <div class="svc-img">
-            <img src="img/Schutz.jpg" alt="Sanierung" loading="lazy">
-          </div>
-          <div class="svc-body">
-            <div class="svc-tag">02 — Sanierung</div>
-            <h3>Sanierung &amp; Instandhaltung</h3>
-            <p>Behutsame Sanierung historischer Bauten gehört seit Jahrzehnten zu unseren Kernkompetenzen. Geschichte trifft Moderne.</p>
-            <ul class="svc-list">
-              <li>Umbauten &amp; Nutzungsänderungen</li>
-              <li>Fassadensanierung</li>
-              <li>Kellerabdichtung</li>
-            </ul>
-          </div>
-        </article>
-        <article class="svc-card rv d2">
-          <div class="svc-img">
-            <img src="img/Erdarbeiten.jpg" alt="Erdarbeiten" loading="lazy">
-          </div>
-          <div class="svc-body">
-            <div class="svc-tag">03 — Erdarbeiten</div>
-            <h3>Erdarbeiten &amp; Tiefbau</h3>
-            <p>Sämtliche Erdarbeiten übernehmen wir in-house – schnell und zuverlässig mit eigenem Maschinenpark.</p>
-            <ul class="svc-list">
-              <li>Öko-Regenspeicher Einbau</li>
-              <li>Freilegung für Kellerabdichtung</li>
-              <li>Kanalerneuerung inkl. Pflasterarbeiten</li>
-            </ul>
-          </div>
-        </article>
+        <div class="hero-btns">
+          <a href="#kontakt" class="btn btn-gold">Jetzt anfragen</a>
+          <a href="#leistungen" class="btn btn-outline">Leistungen entdecken</a>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
 
+  <div class="container">
+    <div class="stats-bar">
+      <div class="stats-inner">
+        <div class="stat-item">
+          <div class="stat-num" id="s1">75+</div>
+          <div class="stat-lbl">Jahre Erfahrung</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" id="s2">1948</div>
+          <div class="stat-lbl">Gegründet in Oelde</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" id="s3">100%</div>
+          <div class="stat-lbl">HVO Klimaneutral</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" id="s4">3</div>
+          <div class="stat-lbl">Kernleistungen</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <!-- ============================================================
-       HVO — EIGENE GROSSE SEKTION
-       ============================================================ -->
-  <section id="hvo" class="sp">
-    <div class="container">
-      <div class="hvo-grid">
+<!-- BAND -->
+<div id="intro-band" aria-hidden="true">
+  <div class="band-track">
+    <span class="band-item">Rohbau <span class="band-dot"></span></span>
+    <span class="band-item">Sanierung <span class="band-dot"></span></span>
+    <span class="band-item">Erdarbeiten <span class="band-dot"></span></span>
+    <span class="band-item">HVO 100 <span class="band-dot"></span></span>
+    <span class="band-item">Seit 1948 <span class="band-dot"></span></span>
+    <span class="band-item">Oelde · Westfalen <span class="band-dot"></span></span>
+    <span class="band-item">Inhabergeführt <span class="band-dot"></span></span>
+    <span class="band-item">Rohbau <span class="band-dot"></span></span>
+    <span class="band-item">Sanierung <span class="band-dot"></span></span>
+    <span class="band-item">Erdarbeiten <span class="band-dot"></span></span>
+    <span class="band-item">HVO 100 <span class="band-dot"></span></span>
+    <span class="band-item">Seit 1948 <span class="band-dot"></span></span>
+    <span class="band-item">Oelde · Westfalen <span class="band-dot"></span></span>
+    <span class="band-item">Inhabergeführt <span class="band-dot"></span></span>
+  </div>
+</div>
 
-        <div class="hvo-visual rv">
-          <img class="hvo-img-main"
-               src="img/roh2.jpg"
-               alt="Haferkemper Fahrzeugflotte HVO 100" loading="lazy">
-          <div class="hvo-badge">
-            <strong>HVO</strong>
-            <span>100%<br>klimaneutral</span>
+<!-- ================================================================
+     VERSPRECHEN — Bento Grid
+================================================================ -->
+<section id="versprechen" class="sp">
+  <div class="container">
+    <div class="versprechen-header rv">
+      <p class="eyebrow eyebrow-center">Unsere Stärken</p>
+      <h2>Was Sie von uns erwarten dürfen.</h2>
+      <p>Sechs Versprechen, die wir seit Jahrzehnten täglich einhalten – gegenüber jedem Kunden, bei jedem Projekt.</p>
+    </div>
+
+    <div class="bento-grid">
+
+      <!-- 1 · Kompetent — large card with pills -->
+      <div class="bc bc-1 bc-dark rv delay-1">
+        <div class="bc-number">I</div>
+        <div class="bc-icon">
+          <svg fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <div class="bc-tag">Kompetent</div>
+        <h3>Jahrzehnte­langes Fachwissen</h3>
+        <p>Über 75 Jahre Bauerfahrung, gepaart mit modernen Methoden und einem eingespielten Team. Dipl.-Ing. Sven Vosshans leitet jedes Projekt persönlich.</p>
+        <div class="bc-pills">
+          <span class="bc-pill">Rohbau</span>
+          <span class="bc-pill">Sanierung</span>
+          <span class="bc-pill">Tiefbau</span>
+          <span class="bc-pill">Planung</span>
+        </div>
+      </div>
+
+      <!-- 2 · Nachhaltig -->
+      <div class="bc bc-2 bc-cream rv delay-2">
+        <div class="bc-number">II</div>
+        <div class="bc-icon">
+          <svg fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="bc-tag">Nachhaltig</div>
+        <h3>Klimaneutral unterwegs</h3>
+        <p>Unsere gesamte Fahrzeugflotte fährt mit HVO 100 – dem paraffinischen Kraftstoff aus erneuerbaren Quellen. Verantwortung für Mensch und Umwelt.</p>
+        <div class="bc-pills">
+          <span class="bc-pill">HVO 100</span>
+          <span class="bc-pill">CO₂-neutral</span>
+        </div>
+      </div>
+
+      <!-- 3 · Qualität — gold accent -->
+      <div class="bc bc-3 bc-gold rv delay-3 bc-accent-top">
+        <div class="bc-number">III</div>
+        <div class="bc-icon">
+          <svg fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <div class="bc-tag">Qualität</div>
+        <h3>Keine Kompromisse</h3>
+        <p>Einwandfreie Ausführung. Beste Materialien. Fachgerechte Verarbeitung – jedes Mal.</p>
+      </div>
+
+      <!-- 4 · Kosten -->
+      <div class="bc bc-4 bc-light rv delay-1">
+        <div class="bc-number">IV</div>
+        <div class="bc-icon">
+          <svg fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div class="bc-tag">Kosten</div>
+        <h3>Transparente Preise</h3>
+        <p>Klare Angebote, faire Preise, keine versteckten Kosten. Wir denken wirtschaftlich – für Sie.</p>
+      </div>
+
+      <!-- 5 · Zuverlässig — wide with stat -->
+      <div class="bc bc-5 bc-stone rv delay-2">
+        <div class="bc-number">V</div>
+        <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:1rem; flex-wrap:wrap;">
+          <div>
+            <div class="bc-icon">
+              <svg fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="bc-tag">Zuverlässig</div>
+            <h3>Termintreue als Versprechen</h3>
+            <p>Perfekte Planung, akkurate Umsetzung. Mit eigenem Maschinenpark reagieren wir flexibel – Ihr Termin ist unser Termin.</p>
+          </div>
+          <div style="text-align:right; flex-shrink:0;">
+            <div class="bc-stat-big">75+</div>
+            <div class="bc-stat-label">Jahre Verlässlichkeit</div>
           </div>
         </div>
+      </div>
 
-        <div class="hvo-text rv d1">
-          <p class="label">Nachhaltigkeit &amp; Umweltschutz</p>
-          <h2>Klimaneutral bauen –<br>heute schon.</h2>
-          <p>
-            Als Vorreiter beim Thema Nachhaltigkeit im Bauhandwerk tankt unsere komplette
-            Fahrzeugflotte bereits heute klimaneutralen HVO 100 Treibstoff. HVO 100 ist ein
-            hydrotreated vegetable oil – ein zu 100% erneuerbarer Kraftstoff aus organischen Abfällen.
-          </p>
-          <div class="hvo-facts">
-            <div class="hvo-fact">
-              <div class="hvo-fact-icon"></div>
-              <h4>bis zu 90% weniger CO₂</h4>
-              <p>Im Vergleich zu konventionellem Diesel reduziert HVO 100 den CO₂-Ausstoß drastisch.</p>
-            </div>
-            <div class="hvo-fact">
-              <div class="hvo-fact-icon"></div>
-              <h4>Gesamte Fahrzeugflotte</h4>
-              <p>Kein Kompromiss – alle unsere Baufahrzeuge und Maschinen fahren klimaneutral.</p>
-            </div>
-            <div class="hvo-fact">
-              <div class="hvo-fact-icon"></div>
-              <h4>Nachhaltige Rohstoffe</h4>
-              <p>Von der Materialbeschaffung bis zur Entsorgung denken wir ökologisch.</p>
-            </div>
-            <div class="hvo-fact">
-              <div class="hvo-fact-icon"></div>
-              <h4>Verantwortung für Morgen</h4>
-              <p>Wir handeln heute so, dass zukünftige Generationen noch gut leben können.</p>
-            </div>
-          </div>
-          <a href="#kontakt" class="btn btn-gold">Mehr erfahren</a>
+      <!-- 6 · Kundenorientiert — dark -->
+      <div class="bc bc-6 bc-dark rv delay-3">
+        <div class="bc-number">VI</div>
+        <div class="bc-icon">
+          <svg fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
-
+        <div class="bc-tag">Kundenorientiert</div>
+        <h3>Ihr Anliegen steht im Mittelpunkt</h3>
+        <p>Kein anonymes Büro, kein Callcenter. Sie sprechen direkt mit der Person, die Ihr Projekt verantwortet – von der ersten Anfrage bis zur Übergabe.</p>
       </div>
+
     </div>
-  </section>
+  </div>
+</section>
 
 
-  <!-- ============================================================
-       PORTFOLIO
-       ============================================================ -->
-  <section id="impressionen" class="sp">
-    <div class="container">
-      <div class="port-header rv">
-        <p class="label label-center">Impressionen</p>
-        <h2>Einblicke in unsere Arbeit.</h2>
-        <p>Ein kleiner Ausschnitt unserer realisierten Projekte in Oelde und der Region Westfalen.</p>
+<!-- ================================================================
+     PERSON — Sven Vosshans
+================================================================ -->
+<section id="sven" class="sp">
+  <div class="container">
+    <div class="sven-grid">
+
+      <div class="sven-photo-wrap rv">
+        <img class="sven-photo"
+             src="img/sven.jpg"
+             alt="Sven Vosshans – Geschäftsführer Bauunternehmung Haferkemper"
+             loading="lazy">
+        <div class="sven-badge">
+          <p>„Mit Kopf, Herz und Hand – das ist unser Versprechen."</p>
+          <strong>Sven Vosshans · Geschäftsführer</strong>
+        </div>
       </div>
-      <div class="port-grid">
-        <figure class="port-item rv"   data-src="img/roh1.jpg" tabindex="0"><img src="img/roh1.jpg" alt="Projekt 1" loading="lazy"><div class="port-ov"><div class="port-ov-icon"></div></div></figure>
-        <figure class="port-item rv d1" data-src="img/roh2.jpg" tabindex="0"><img src="img/roh2.jpg" alt="Projekt 2" loading="lazy"><div class="port-ov"><div class="port-ov-icon"></div></div></figure>
-        <figure class="port-item rv d2" data-src="img/roh3.jpg" tabindex="0"><img src="img/roh3.jpg" alt="Projekt 3" loading="lazy"><div class="port-ov"><div class="port-ov-icon"></div></div></figure>
-        <figure class="port-item rv d3" data-src="img/roh4.jpg" tabindex="0"><img src="img/roh4.jpg" alt="Projekt 4" loading="lazy"><div class="port-ov"><div class="port-ov-icon"></div></div></figure>
-        <figure class="port-item rv"   data-src="img/roh5.jpg" tabindex="0"><img src="img/roh5.jpg" alt="Projekt 5" loading="lazy"><div class="port-ov"><div class="port-ov-icon"></div></div></figure>
-        <figure class="port-item rv d1" data-src="img/roh6.jpg" tabindex="0"><img src="img/roh6.jpg" alt="Projekt 6" loading="lazy"><div class="port-ov"><div class="port-ov-icon"></div></div></figure>
-        <figure class="port-item rv d2" data-src="img/roh7.jpg" tabindex="0"><img src="img/roh7.jpg" alt="Projekt 7" loading="lazy"><div class="port-ov"><div class="port-ov-icon"></div></div></figure>
-        <figure class="port-item rv d3" data-src="img/roh8.jpg" tabindex="0"><img src="img/roh8.jpg" alt="Projekt 8" loading="lazy"><div class="port-ov"><div class="port-ov-icon"></div></div></figure>
-        <figure class="port-item rv"   data-src="img/roh9.jpg" tabindex="0"><img src="img/roh9.jpg" alt="Projekt 9" loading="lazy"><div class="port-ov"><div class="port-ov-icon"></div></div></figure>
+
+      <div class="sven-text rv delay-2">
+        <p class="eyebrow">Ihr direkter Ansprechpartner</p>
+        <h2>Persönlich.<br>Kompetent.<br>Verlässlich.</h2>
+        <p>Als inhabergeführtes Unternehmen stehen bei uns noch echte Werte im Mittelpunkt. Kein anonymes Büro, kein Callcenter – Sie sprechen direkt mit der Person, die Ihr Bauprojekt verantwortet.</p>
+        <p><strong>Dipl.-Ing. Sven Vosshans</strong> begleitet jedes Projekt persönlich – von der ersten Anfrage bis zur schlüsselfertigen Übergabe. Bei Bedarf übernimmt er auch die Koordination sämtlicher weiterer Gewerke.</p>
+        <p>Das gibt Ihnen die Sicherheit, dass Ihr Bauvorhaben in denselben Händen bleibt – die Hände, die wissen, was sie tun.</p>
+        <div class="sven-signature">
+          <div class="sven-avatar">SV</div>
+          <div>
+            <div class="sven-name">Dipl.-Ing. Sven Vosshans</div>
+            <div class="sven-role">Geschäftsführer · Haferkemper GmbH &amp; Co. KG</div>
+          </div>
+        </div>
+        <div class="sven-btns">
+          <a href="#kontakt" class="btn btn-gold">Direkt anfragen</a>
+          <a href="tel:025224149" class="btn btn-outline-dark">02522 4149 anrufen</a>
+        </div>
       </div>
+
     </div>
-  </section>
+  </div>
+</section>
 
 
-  <!-- ============================================================
-       QUOTE
-       ============================================================ -->
-  <section id="zitat">
-    <div class="container">
-      <span class="zitat-mark">"</span>
-      <blockquote>
-        <p>Auch aus Steinen, die einem in den Weg gelegt werden,<br>kann man Schönes bauen.</p>
-        <cite>— Johann Wolfgang von Goethe</cite>
-      </blockquote>
+<!-- ================================================================
+     SERVICES — Accordion
+================================================================ -->
+<section id="leistungen" class="sp">
+  <div class="container">
+    <div class="svc-header rv">
+      <div>
+        <p class="eyebrow">Leistungen</p>
+        <h2>Rundum-Service<br>aus einer Hand.</h2>
+      </div>
+      <p>Von der Planung bis zur Fertigstellung – wir begleiten Ihr Bauvorhaben in allen Phasen.</p>
     </div>
-  </section>
 
+    <div class="acc-list rv delay-1">
 
-  <!-- ============================================================
-       CONTACT
-       ============================================================ -->
-  <section id="kontakt" class="sp">
-    <div class="container">
-      <div class="kontakt-grid">
-
-        <div class="kontakt-info rv">
-          <p class="label">Kontakt</p>
-          <h2>Lassen Sie uns<br>zusammenbauen.</h2>
-          <p>Rufen Sie uns an, schreiben Sie uns – oder nutzen Sie unser Kontaktformular. Sven Vosshans antwortet Ihnen persönlich.</p>
-          <div class="k-items">
-            <div class="k-item">
-              <div class="k-icon">
-                <svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.69 3.35 2 2 0 0 1 3.66 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.69a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <!-- Rohbau -->
+      <div class="acc-item open">
+        <button class="acc-trigger" aria-expanded="true">
+          <span class="acc-num">01</span>
+          <span class="acc-title">Rohbau &amp; Ausbauhäuser</span>
+          <span class="acc-sub">Neubau · Umbau · Keller</span>
+          <span class="acc-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="acc-panel">
+          <div class="acc-panel-inner">
+            <div class="acc-panel-body">
+              <div class="acc-img">
+                <img src="img/Rohbau.jpg" alt="Rohbau" loading="lazy">
               </div>
-              <div>
-                <div class="k-lbl">Telefon</div>
-                <div class="k-val"><a href="tel:025224149">02522 4149</a></div>
-              </div>
-            </div>
-            <div class="k-item">
-              <div class="k-icon">
-                <svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-              </div>
-              <div>
-                <div class="k-lbl">E-Mail</div>
-                <div class="k-val"><a href="/cdn-cgi/l/email-protection#e1888f878ea189808784938a848c918493cc838094cf8584"><span class="__cf_email__" data-cfemail="254c4b434a654d444340574e4048554057084744500b4140">[email&#160;protected]</span></a></div>
-              </div>
-            </div>
-            <div class="k-item">
-              <div class="k-icon">
-                <svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              </div>
-              <div>
-                <div class="k-lbl">Adresse</div>
-                <div class="k-val">Zum Geisterholz 10 · 59302 Oelde</div>
+              <div class="acc-content">
+                <p>Rohbauten und Ausbauhäuser werden auf Ihre Wünsche abgestimmt. Durch Eigenleistung bestimmen Sie den Umfang des Angebotes – so sparen Sie dort, wo es sinnvoll ist, ohne auf Qualität zu verzichten.</p>
+                <ul class="acc-svc-list">
+                  <li>Ein- und Mehrfamilienhäuser</li>
+                  <li>An- und Umbauten</li>
+                  <li>Keller &amp; Untergeschosse</li>
+                  <li>Gewerbeobjekte &amp; Industriebauten</li>
+                </ul>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <div>
-          <div class="form-box">
-            <h3>Anfrage stellen</h3>
-            <p>Alle mit * markierten Felder sind Pflichtfelder.</p>
-            <div id="form-ok" class="form-ok">
-              <strong>✓ Nachricht gesendet!</strong><br>
-              Wir melden uns schnellstmöglich bei Ihnen.
+      <!-- Sanierung -->
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false">
+          <span class="acc-num">02</span>
+          <span class="acc-title">Sanierung &amp; Instandhaltung</span>
+          <span class="acc-sub">Fassade · Keller · Umbau</span>
+          <span class="acc-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="acc-panel">
+          <div class="acc-panel-inner">
+            <div class="acc-panel-body">
+              <div class="acc-img">
+                <img src="img/Schutz.jpg" alt="Sanierung" loading="lazy">
+              </div>
+              <div class="acc-content">
+                <p>Behutsame Sanierung historischer Bauten gehört seit Jahrzehnten zu unseren Kernkompetenzen. Geschichte trifft Moderne – wir erhalten den Charakter, erneuern die Substanz.</p>
+                <ul class="acc-svc-list">
+                  <li>Umbauten &amp; Nutzungsänderungen</li>
+                  <li>Fassadensanierung</li>
+                  <li>Kellerabdichtung</li>
+                  <li>Denkmalgerechte Sanierung</li>
+                </ul>
+              </div>
             </div>
-            <form id="cform" novalidate>
-              <div class="form-row">
-                <div class="fg"><label>Name *</label><input type="text" name="name" placeholder="Max Mustermann" required></div>
-                <div class="fg"><label>E-Mail *</label><input type="email" name="email" placeholder="max@beispiel.de" required></div>
-              </div>
-              <div class="form-row">
-                <div class="fg"><label>Telefon</label><input type="tel" name="phone" placeholder="+49 2522 …"></div>
-                <div class="fg">
-                  <label>Leistung</label>
-                  <select name="service">
-                    <option value="">Bitte wählen</option>
-                    <option>Rohbau</option>
-                    <option>Sanierung</option>
-                    <option>Erdarbeiten</option>
-                    <option>Sonstiges</option>
-                  </select>
-                </div>
-              </div>
-              <div class="fg"><label>Nachricht *</label><textarea name="message" placeholder="Beschreiben Sie Ihr Bauvorhaben…" required></textarea></div>
-              <button type="submit" class="btn btn-gold btn-submit" id="fbtn">Anfrage absenden</button>
-              <p style="margin-top:0.8rem; font-size:0.72rem; color:var(--text-muted);">Mit dem Absenden stimmen Sie der Verarbeitung Ihrer Daten zu.</p>
-            </form>
           </div>
         </div>
+      </div>
 
+      <!-- Erdarbeiten -->
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false">
+          <span class="acc-num">03</span>
+          <span class="acc-title">Erdarbeiten &amp; Tiefbau</span>
+          <span class="acc-sub">Maschinenpark · Kanal · Pflaster</span>
+          <span class="acc-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="acc-panel">
+          <div class="acc-panel-inner">
+            <div class="acc-panel-body">
+              <div class="acc-img">
+                <img src="img/Erdarbeiten.jpg" alt="Erdarbeiten" loading="lazy">
+              </div>
+              <div class="acc-content">
+                <p>Sämtliche Erdarbeiten übernehmen wir in-house – schnell und zuverlässig mit eigenem Maschinenpark. Das spart Koordination, Zeit und Kosten für Sie.</p>
+                <ul class="acc-svc-list">
+                  <li>Öko-Regenspeicher Einbau</li>
+                  <li>Freilegung für Kellerabdichtung</li>
+                  <li>Kanalerneuerung inkl. Pflasterarbeiten</li>
+                  <li>Geländemodellierung &amp; Aushub</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================
+     HVO — Nachhaltigkeit (Dark Statement)
+================================================================ -->
+<section id="hvo" class="sp">
+  <div class="container">
+
+    <!-- Top: headline + big stat -->
+    <div class="hvo-top">
+      <div class="hvo-headline rv">
+        <p class="eyebrow eyebrow-light">Nachhaltigkeit &amp; Umweltschutz</p>
+        <h2>Wir bauen.<br>Wir schützen.</h2>
+        <p>Als modernes Bauunternehmen übernehmen wir Verantwortung – für unsere Kunden, die Region und die Umwelt. Mit HVO 100 fährt unsere gesamte Flotte bereits vollständig klimaneutral.</p>
+      </div>
+      <div class="hvo-big-stat rv delay-2">
+        <span class="hvo-big-num">–90%</span>
+        <span class="hvo-big-label">CO₂-Reduktion im Lebenszyklus gegenüber fossilem Diesel</span>
       </div>
     </div>
-  </section>
+
+    <div class="hvo-divider"></div>
+
+    <!-- Bottom: image + fact cards -->
+    <div class="hvo-bottom rv delay-1">
+      <div class="hvo-img-wrap">
+        <img class="hvo-img" src="img/roh2.jpg" alt="Haferkemper Fahrzeugflotte HVO 100" loading="lazy">
+        <div class="hvo-img-badge">HVO 100 · Gesamte Flotte</div>
+      </div>
+
+      <div class="hvo-facts">
+        <div class="hvo-fact">
+          <span class="hvo-fact-num">100%</span>
+          <h4>Klimaneutrale Flotte</h4>
+          <p>Alle Fahrzeuge und Maschinen laufen mit HVO 100 – ausnahmslos.</p>
+        </div>
+        <div class="hvo-fact">
+          <span class="hvo-fact-num">HVO</span>
+          <h4>Erneuerbarer Kraftstoff</h4>
+          <p>Paraffinischer Diesel aus Rest- und Abfallstoffen – kein Palmöl.</p>
+        </div>
+        <div class="hvo-fact">
+          <span class="hvo-fact-num">∞</span>
+          <h4>Ökologischer Kreislauf</h4>
+          <p>Nachhaltige Materialwahl und ressourcenschonende Prozesse auf der Baustelle.</p>
+        </div>
+        <div class="hvo-fact">
+          <span class="hvo-fact-num">#1</span>
+          <h4>Vorreiter in der Region</h4>
+          <p>Eines der ersten Bauunternehmen in Westfalen mit vollständig klimaneutraler Flotte.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ================================================================
+     IMPRESSIONEN
+================================================================ -->
+<section id="impressionen" class="sp" style="background:var(--off-white);">
+  <div class="container">
+    <div class="port-header rv">
+      <p class="eyebrow eyebrow-center">Impressionen</p>
+      <h2>Unsere Arbeit spricht für sich.</h2>
+      <p>Ein Einblick in ausgewählte Projekte aus der Region Oelde und Westfalen.</p>
+    </div>
+    <div class="port-grid rv delay-1">
+      <div class="port-item">
+        <img src="img/roh3.jpg" alt="Rohbau Projekt" loading="lazy">
+        <div class="port-ov">
+          <div class="port-expand">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="port-item">
+        <img src="img/Rohbau.jpg" alt="Rohbau" loading="lazy">
+        <div class="port-ov"><div class="port-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+      </div>
+      <div class="port-item">
+        <img src="img/Schutz.jpg" alt="Sanierung" loading="lazy">
+        <div class="port-ov"><div class="port-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+      </div>
+      <div class="port-item">
+        <img src="img/Erdarbeiten.jpg" alt="Erdarbeiten" loading="lazy">
+        <div class="port-ov"><div class="port-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+      </div>
+      <div class="port-item">
+        <img src="img/roh2.jpg" alt="Baustelle" loading="lazy">
+        <div class="port-ov"><div class="port-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+      </div>
+      <div class="port-item">
+        <img src="img/sven.jpg" alt="Team Haferkemper" loading="lazy">
+        <div class="port-ov"><div class="port-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================
+     ZITAT
+================================================================ -->
+<section id="zitat">
+  <div class="container">
+    <blockquote class="rv">
+      <p>„Qualität ist kein Zufall – sie ist das Ergebnis von Erfahrung, Sorgfalt und dem Willen, es richtig zu machen."</p>
+      <cite>Dipl.-Ing. Sven Vosshans · Geschäftsführer Haferkemper</cite>
+    </blockquote>
+  </div>
+</section>
+
+
+<!-- ================================================================
+     KONTAKT
+================================================================ -->
+<section id="kontakt" class="sp">
+  <div class="container">
+    <div class="kontakt-grid">
+      <div class="rv">
+        <p class="eyebrow">Kontakt</p>
+        <h2>Lassen Sie uns sprechen.</h2>
+        <p>Wir freuen uns auf Ihre Anfrage – egal ob Neubau, Sanierung oder Erdarbeiten. Sven Vosshans antwortet persönlich.</p>
+        <div class="k-items" style="margin-top:2rem;">
+          <div class="k-item">
+            <div class="k-icon">
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.59 1.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.73 16z"/></svg>
+            </div>
+            <div>
+              <div class="k-lbl">Telefon</div>
+              <div class="k-val"><a href="tel:025224149">02522 4149</a></div>
+            </div>
+          </div>
+          <div class="k-item">
+            <div class="k-icon">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <div class="k-lbl">E-Mail</div>
+              <div class="k-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="91f8fff7fed1f9f0f7f4e3faf4fce1f4e3bcf3f0e4bff5f4">[email&#160;protected]</a></div>
+            </div>
+          </div>
+          <div class="k-item">
+            <div class="k-icon">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <div class="k-lbl">Adresse</div>
+              <div class="k-val">Zum Geisterholz 10 · 59302 Oelde</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rv delay-2">
+        <div class="form-box">
+          <h3>Anfrage stellen</h3>
+          <p>Alle mit * markierten Felder sind Pflichtfelder.</p>
+          <div id="form-ok" class="form-ok">
+            <strong>✓ Nachricht gesendet!</strong><br>
+            Wir melden uns schnellstmöglich bei Ihnen.
+          </div>
+          <form id="cform" novalidate>
+            <div class="form-row">
+              <div class="fg"><label>Name *</label><input type="text" name="name" placeholder="Max Mustermann" required></div>
+              <div class="fg"><label>E-Mail *</label><input type="email" name="email" placeholder="max@beispiel.de" required></div>
+            </div>
+            <div class="form-row">
+              <div class="fg"><label>Telefon</label><input type="tel" name="phone" placeholder="+49 2522 …"></div>
+              <div class="fg">
+                <label>Leistung</label>
+                <select name="service">
+                  <option value="">Bitte wählen</option>
+                  <option>Rohbau</option>
+                  <option>Sanierung</option>
+                  <option>Erdarbeiten</option>
+                  <option>Sonstiges</option>
+                </select>
+              </div>
+            </div>
+            <div class="fg"><label>Nachricht *</label><textarea name="message" placeholder="Beschreiben Sie Ihr Bauvorhaben…" required></textarea></div>
+            <button type="submit" class="btn btn-gold btn-submit" id="fbtn">Anfrage absenden</button>
+            <p style="margin-top:0.8rem; font-size:0.72rem; color:var(--text-muted);">Mit dem Absenden stimmen Sie der Verarbeitung Ihrer Daten zu.</p>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
 
 </main>
 
-<!-- ============================================================
+<!-- ================================================================
      FOOTER
-     ============================================================ -->
+================================================================ -->
 <footer id="ftr">
   <div class="container">
     <div class="ftr-grid">
       <div class="ftr-brand">
-        <div class="ftr-logo-main">Haferkemper</div>
+        <div class="ftr-logo">Haferkemper</div>
         <div class="ftr-logo-sub">Bauunternehmung · Oelde seit 1948</div>
         <p>Seit mehr als 75 Jahren Ihr verlässlicher Partner für Rohbau, Sanierung und Erdarbeiten in Oelde und der Region Westfalen.</p>
-        <div style="margin-top:1.2rem; display:flex; gap:0.6rem; flex-wrap:wrap;">
-          <span style="background:rgba(184,134,11,0.15); border:1px solid rgba(184,134,11,0.3); color:var(--gold-light); padding:0.25rem 0.8rem; border-radius:2rem; font-family:var(--font-mono); font-size:0.6rem; letter-spacing:0.1em; text-transform:uppercase;">HVO 100</span>
-          <span style="background:rgba(184,134,11,0.15); border:1px solid rgba(184,134,11,0.3); color:var(--gold-light); padding:0.25rem 0.8rem; border-radius:2rem; font-family:var(--font-mono); font-size:0.6rem; letter-spacing:0.1em; text-transform:uppercase;">75+ Jahre</span>
+        <div class="ftr-tags">
+          <span class="ftr-tag">HVO 100</span>
+          <span class="ftr-tag">75+ Jahre</span>
+          <span class="ftr-tag">Inhabergeführt</span>
         </div>
       </div>
       <div class="ftr-col">
@@ -1150,6 +1423,7 @@
         <ul>
           <li><a href="#hero">Startseite</a></li>
           <li><a href="#sven">Über uns</a></li>
+          <li><a href="#versprechen">Stärken</a></li>
           <li><a href="#leistungen">Leistungen</a></li>
           <li><a href="#hvo">Nachhaltigkeit</a></li>
           <li><a href="#impressionen">Impressionen</a></li>
@@ -1160,12 +1434,12 @@
         <h4>Kontakt</h4>
         <ul>
           <li><a href="tel:025224149">02522 4149</a></li>
-          <li><a href="/cdn-cgi/l/email-protection#71181f171e3119101714031a141c0114035c1310045f1514"><span class="__cf_email__" data-cfemail="11787f777e5179707774637a747c6174633c7370643f7574">[email&#160;protected]</span></a></li>
-          <li style="color:rgba(255,255,255,0.35); font-size:0.83rem; line-height:1.6;">Zum Geisterholz 10<br>59302 Oelde</li>
+          <li><a href="#"><span class="__cf_email__" data-cfemail="543d3a323b143c353231263f3139243126793635217a3031">[email&#160;protected]</span></a></li>
+          <li style="color:rgba(255,255,255,0.3); font-size:0.83rem; line-height:1.7;">Zum Geisterholz 10<br>59302 Oelde</li>
         </ul>
-        <div style="margin-top:1.2rem;">
+        <div style="margin-top:1.5rem;">
           <h4 style="margin-bottom:0.6rem;">Handelsregister</h4>
-          <p style="font-size:0.73rem; color:rgba(255,255,255,0.3); line-height:1.7;">HRA 10388 · Amtsgericht Münster<br>USt-ID: DE126795991<br>GF: Dipl.-Ing. Sven Vosshans</p>
+          <p style="font-size:0.72rem; color:rgba(255,255,255,0.28); line-height:1.75;">HRA 10388 · Amtsgericht Münster<br>USt-ID: DE126795991<br>GF: Dipl.-Ing. Sven Vosshans</p>
         </div>
       </div>
     </div>
@@ -1181,6 +1455,30 @@
   </div>
 </footer>
 
+<!-- Mobile Nav -->
+<nav id="mobile-nav" aria-label="Mobile Navigation">
+  <a href="#hero">
+    <svg fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    Start
+  </a>
+  <a href="#versprechen">
+    <svg fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+    Stärken
+  </a>
+  <a href="#leistungen">
+    <svg fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+    Leistungen
+  </a>
+  <a href="#impressionen">
+    <svg fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+    Projekte
+  </a>
+  <a href="#kontakt">
+    <svg fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.59 1.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.73 16z"/></svg>
+    Kontakt
+  </a>
+</nav>
+
 <!-- Lightbox -->
 <div class="lb" id="lb">
   <button class="lb-close" id="lbc">✕</button>
@@ -1191,49 +1489,75 @@
 (function(){
   'use strict';
 
-  /* Header */
+  /* Header scroll */
   const hdr = document.getElementById('hdr');
-  window.addEventListener('scroll', ()=>{ hdr.classList.toggle('scrolled', scrollY>30); }, {passive:true});
-  hdr.classList.toggle('scrolled', scrollY>30);
+  const onScroll = () => hdr.classList.toggle('scrolled', scrollY > 30);
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
 
-  /* Mobile nav */
-  const ham = document.getElementById('ham');
-  const nav = document.getElementById('sitenav');
-  ham?.addEventListener('click',()=>{
-    const o = nav.classList.toggle('open');
-    ham.classList.toggle('open',o);
-    document.body.style.overflow = o ? 'hidden' : '';
-  });
-  nav?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
-    nav.classList.remove('open'); ham.classList.remove('open'); document.body.style.overflow='';
-  }));
-
-  /* Scroll reveal */
+  /* Scroll reveal — safe, only adds class */
   const rvEls = document.querySelectorAll('.rv');
-  const rvo = new IntersectionObserver(entries=>{
-    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); rvo.unobserve(e.target); } });
-  },{threshold:0.1, rootMargin:'0px 0px -50px 0px'});
-  rvEls.forEach(el=>rvo.observe(el));
+  if(rvEls.length){
+    const rvo = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); rvo.unobserve(e.target); } });
+    },{threshold:0.08, rootMargin:'0px 0px -40px 0px'});
+    rvEls.forEach(el=>rvo.observe(el));
+  }
 
-  /* Counter */
+  /* Counter animation */
   function counter(el, to, sfx, dur){
+    if(!el) return;
     let v=0; const s=to/(dur/16);
     const t=setInterval(()=>{ v=Math.min(v+s,to); el.textContent=Math.floor(v)+sfx; if(v>=to)clearInterval(t); },16);
   }
-  const sb = document.querySelector('.stats-box');
-  if(sb){ const so=new IntersectionObserver(e=>{ if(e[0].isIntersecting){
-    counter(document.getElementById('s1'),75,'+',1100);
-    counter(document.getElementById('s2'),1948,'',1400);
-    counter(document.getElementById('s3'),100,'%',900);
-    counter(document.getElementById('s4'),3,'',500);
-    so.disconnect();
-  }},{threshold:0.5}); so.observe(sb); }
+  const sb = document.querySelector('.stats-inner');
+  if(sb){
+    const so=new IntersectionObserver(e=>{
+      if(e[0].isIntersecting){
+        counter(document.getElementById('s1'),75,'+',1100);
+        counter(document.getElementById('s2'),1948,'',1400);
+        counter(document.getElementById('s3'),100,'%',900);
+        counter(document.getElementById('s4'),3,'',500);
+        so.disconnect();
+      }
+    },{threshold:0.5});
+    so.observe(sb);
+  }
+
+  /* Accordion */
+  document.querySelectorAll('.acc-trigger').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const item = btn.closest('.acc-item');
+      const isOpen = item.classList.contains('open');
+      // close all
+      document.querySelectorAll('.acc-item').forEach(i=>{
+        i.classList.remove('open');
+        i.querySelector('.acc-trigger').setAttribute('aria-expanded','false');
+      });
+      // open clicked (toggle)
+      if(!isOpen){
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded','true');
+      }
+    });
+  });
+
+  /* Mobile nav active state */
+  const sections = document.querySelectorAll('section[id], main');
+  const mnavLinks = document.querySelectorAll('#mobile-nav a');
+  window.addEventListener('scroll', ()=>{
+    let current = '';
+    sections.forEach(s=>{ if(scrollY >= s.offsetTop - 120) current = s.id; });
+    mnavLinks.forEach(a=>{ a.classList.toggle('active', a.getAttribute('href')==='#'+current); });
+  },{passive:true});
 
   /* Lightbox */
   const lb=document.getElementById('lb'), lbi=document.getElementById('lbi'), lbc=document.getElementById('lbc');
   document.querySelectorAll('.port-item').forEach(it=>{
-    it.addEventListener('click',()=>{ const s=it.dataset.src||it.querySelector('img')?.src; if(s&&lb&&lbi){ lbi.src=s; lb.classList.add('open'); document.body.style.overflow='hidden'; } });
-    it.addEventListener('keydown',e=>{ if(e.key==='Enter')it.click(); });
+    it.addEventListener('click',()=>{
+      const s=it.dataset.src||it.querySelector('img')?.src;
+      if(s&&lb&&lbi){ lbi.src=s; lb.classList.add('open'); document.body.style.overflow='hidden'; }
+    });
   });
   const clb=()=>{ lb?.classList.remove('open'); document.body.style.overflow=''; };
   lbc?.addEventListener('click',clb);
@@ -1244,10 +1568,12 @@
   document.querySelectorAll('a[href^="#"]').forEach(a=>{
     a.addEventListener('click',function(e){
       const t=document.querySelector(this.getAttribute('href'));
-      if(t){ e.preventDefault(); window.scrollTo({top:t.getBoundingClientRect().top+scrollY-76, behavior:'smooth'}); }
+      if(t){ e.preventDefault(); window.scrollTo({top:t.getBoundingClientRect().top+scrollY-72, behavior:'smooth'}); }
     });
   });
 
   /* Form */
-  const cf=document.getElementById('cform'), fok=document.getElementById('form-ok'), fbtn=document.getElementById('fbtn');
-  cf?.addEventListener(
+  const cf=document.getElementById('cform'),fok=document.getElementById('form-ok'),fbtn=document.getElementById('fbtn');
+  cf?.addEventListener('submit',function(e){
+    e.preventDefault();
+    const n=cf.querySelector('[name=name]'),em=cf.querySelector('[name=email]'),m
