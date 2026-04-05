@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -94,13 +95,14 @@
     @keyframes fw { from{ opacity:0; transform:translateY(16px); } to{ opacity:1; transform:translateY(0); } }
     @keyframes scale-in { from{ opacity:0; transform:scale(0.96); } to{ opacity:1; transform:scale(1); } }
 
-    /* SCROLL REVEAL — safe, no opacity:0 default */
-    .rv { opacity: 0; transform: translateY(30px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
-    .rv.in { opacity: 1; transform: translateY(0); }
+    /* SCROLL REVEAL — content always visible; animation only when JS is ready */
+    .rv { transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
     .rv.delay-1 { transition-delay: 0.12s; }
     .rv.delay-2 { transition-delay: 0.22s; }
     .rv.delay-3 { transition-delay: 0.32s; }
     .rv.delay-4 { transition-delay: 0.42s; }
+    .js-rv .rv { opacity: 0; transform: translateY(28px); }
+    .js-rv .rv.in { opacity: 1; transform: translateY(0); }
 
     /* ================================================================
        HEADER
@@ -1495,13 +1497,15 @@
   window.addEventListener('scroll', onScroll, {passive:true});
   onScroll();
 
-  /* Scroll reveal — safe, only adds class */
+  /* Scroll reveal — body gets .js-rv first so elements hide, then observer reveals them */
   const rvEls = document.querySelectorAll('.rv');
-  if(rvEls.length){
+  if(rvEls.length && 'IntersectionObserver' in window){
+    document.body.classList.add('js-rv');
     const rvo = new IntersectionObserver(entries=>{
       entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); rvo.unobserve(e.target); } });
-    },{threshold:0.08, rootMargin:'0px 0px -40px 0px'});
-    rvEls.forEach(el=>rvo.observe(el));
+    },{threshold:0.06, rootMargin:'0px 0px -30px 0px'});
+    // Small delay so browser paints the hidden state before observing
+    requestAnimationFrame(()=> rvEls.forEach(el=>rvo.observe(el)));
   }
 
   /* Counter animation */
